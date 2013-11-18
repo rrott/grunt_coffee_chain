@@ -10,7 +10,11 @@ module.exports = (grunt) ->
       punctuation: "."
       separator: ", "
     )
-
+    dest    = options.dest    || 'dist'
+    staging = options.staging || '.tmp'
+    root    = options.root    || 'app'
+    compile = options.compile || true
+    clean   = options.clean   || true
     # Iterate over all specified file groups.
     @files.forEach (f) ->
 
@@ -37,4 +41,3 @@ module.exports = (grunt) ->
 
       # Print a success message.
       grunt.log.writeln "File \"" + f.dest + "\" created."
-
