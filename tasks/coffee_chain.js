@@ -6,9 +6,6 @@
     grunt.registerMultiTask("coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", function() {
       var options;
       options = this.options({
-        dest: 'dist',
-        compile: false,
-        clean: false,
         keyword: '#= require',
         dirKeyword: '#= require_tree',
         separator: grunt.util.linefeed

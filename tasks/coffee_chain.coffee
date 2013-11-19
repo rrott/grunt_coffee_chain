@@ -3,14 +3,10 @@ module.exports = (grunt) ->
   fileFinder = require('./lib/file_finder').init(grunt);
 
   grunt.registerMultiTask "coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", ->
-    # Merge task-specific and/or target-specific options with these defaults.
     options =  @options(
-      dest:      'dist'
-      compile:    false
-      clean:      false
       keyword:    '#= require'
       dirKeyword: '#= require_tree'
-      separator:      grunt.util.linefeed
+      separator:  grunt.util.linefeed
     )
 
     @files.forEach (f) ->
