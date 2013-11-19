@@ -23,18 +23,15 @@ module.exports = (grunt) ->
 
     # Configuration to be run (and then tested).
     coffeeChain:
-      #default_options:
+      #custom_options:
       #  options: {}
       #  files:
       #    "tmp/default_options": ["test/fixtures/testing", "test/fixtures/123"]
 
-      custom_options:
-        options:
-          dest: 'tmp'
+      default_options:
         files:
-          "tmp/custom_options": ["test/fixtures/testing", "test/fixtures/123"]
-          "tmp/custom_options2": ["test/fixtures/testing", "test/fixtures/123"]
-
+          "tmp/default_options.coffee":  ["test/fixtures/main.coffee", "test/fixtures/test.coffee"]
+          "tmp/default_options2.coffee": "test/fixtures/*.coffee"
 
     # Unit tests.
     nodeunit:

@@ -2,8 +2,7 @@
   "use strict";
   module.exports = function(grunt) {
     return grunt.registerMultiTask("coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", function() {
-      var options,
-        _this = this;
+      var options;
       options = this.options({
         dest: 'dist',
         staging: 'tmp',
@@ -24,8 +23,7 @@
           }
           return file_exists;
         }).map(function(filepath) {
-          src = grunt.file.read(filepath);
-          return src;
+          return grunt.file.read(filepath);
         }).join(options.separator);
         grunt.file.write(f.dest, src);
         return grunt.log.writeln("File \"" + f.dest + "\" created.");
