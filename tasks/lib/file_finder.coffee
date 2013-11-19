@@ -17,14 +17,14 @@ exports.init = (grunt) ->
     re = this.searchRegexp(keyword)
     listOfFiles = []
     for line in options.src.split('\n')
-      listOfFiles.push line.replace re, "$1" + this.extension(key) if line.match(re)
+      listOfFiles.push line.replace re, "$1" + this.extension(key, options.extension) if line.match(re)
 
     listOfFiles
 
   exports.searchRegexp = (keyword) ->
     new RegExp("^"+keyword+"[ ](.*)$", "")
 
-  exports.extension = (key) ->
-    if key == "file" then '.js' else ""
+  exports.extension = (key, extension) ->
+    if key == "file" then extension else "*"+extension
 
   exports

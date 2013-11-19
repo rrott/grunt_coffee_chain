@@ -25,13 +25,13 @@ module.exports = (grunt) ->
     coffeeChain:
       #custom_options:
       #  options: {}
+      #    keyword:    '#= require'
+      #    dirKeyword: '#= require_tree'
+      #    extension:  '.js.coffee'
       #  files:
       #    "tmp/default_options": ["test/fixtures/testing", "test/fixtures/123"]
 
       default_options:
-        options:
-          keyword:    '#= require'
-          dirKeyword: '#= require_tree'
         files:
           "tmp/default_options.coffee":  ["test/fixtures/main.coffee", "test/fixtures/test.coffee"]
           "tmp/default_options2.coffee": "test/fixtures/*.coffee"

@@ -1,13 +1,14 @@
 (function() {
   "use strict";
   module.exports = function(grunt) {
-    var fileFinder, generateList, validFiles;
+    var fileFinder, generateList, pathToFolder, validFiles;
     fileFinder = require('./lib/file_finder').init(grunt);
     grunt.registerMultiTask("coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", function() {
       var options;
       options = this.options({
         keyword: '#= require',
         dirKeyword: '#= require_tree',
+        extension: '.coffee',
         separator: grunt.util.linefeed
       });
       return this.files.forEach(function(f) {
@@ -28,16 +29,22 @@
       }
       return file_exists;
     };
-    return generateList = function(filepath, dest, options) {
+    generateList = function(filepath, dest, options) {
       var params;
       params = {
         src: grunt.file.read(filepath),
         keyword: options.keyword,
         dirKeyword: options.dirKeyword,
+        extension: options.extension,
         dest: dest
       };
-      grunt.log.writeln("Files: ", filepath, fileFinder.requiredFiles(params));
-      return grunt.log.writeln("Dirs : ", filepath, fileFinder.requiredDirs(params));
+      grunt.log.writeln("Files: ", pathToFolder(filepath), fileFinder.requiredFiles(params));
+      return grunt.log.writeln("Dirs : ", pathToFolder(filepath), fileFinder.requiredDirs(params));
+    };
+    return pathToFolder = function(filepath) {
+      var re;
+      re = new RegExp("^(.*)[/][^/]*$", "");
+      return filepath.replace(re, "$1");
     };
   };
 
