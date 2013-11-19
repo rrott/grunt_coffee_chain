@@ -23,18 +23,17 @@ module.exports = (grunt) ->
 
     # Configuration to be run (and then tested).
     coffeeChain:
-      default_options:
-        options: {}
-        files:
-          "tmp/default_options": ["test/fixtures/testing", "test/fixtures/123"]
+      #default_options:
+      #  options: {}
+      #  files:
+      #    "tmp/default_options": ["test/fixtures/testing", "test/fixtures/123"]
 
       custom_options:
         options:
-          separator: ": "
-          punctuation: " !!!"
-
+          dest: 'tmp'
         files:
           "tmp/custom_options": ["test/fixtures/testing", "test/fixtures/123"]
+          "tmp/custom_options2": ["test/fixtures/testing", "test/fixtures/123"]
 
 
     # Unit tests.
@@ -43,7 +42,7 @@ module.exports = (grunt) ->
 
     coffee:
       options:
-          sourceMap: true
+        sourceMap: true
       compile:
         files:
           'tasks/coffee_chain.js': 'tasks/*.coffee'
@@ -59,7 +58,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-nodeunit"
   grunt.loadNpmTasks "grunt-contrib-coffee"
-  grunt.loadNpmTasks "grunt-shell"
+  #grunt.loadNpmTasks "grunt-shell"
   #grunt.loadNpmTasks 'grunt-concurrent'
 
   # Whenever the "test" task is run, first clean the "tmp" dir, then run this
@@ -67,4 +66,4 @@ module.exports = (grunt) ->
   grunt.registerTask "test", ["clean", "coffee", "coffeeChain", "nodeunit"]
 
   # By default, lint and run all tests.
-  grunt.registerTask "default", ["coffee", "jshint", "test"]
+  grunt.registerTask "default", ["coffee",  "test"]

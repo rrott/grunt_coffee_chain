@@ -1,6 +1,6 @@
 {
   "name": "grunt-coffee-chain",
-  "description": "grunt's plugin to concat coffeescripts using include derective\"",
+  "description": "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order",
   "version": "0.0.0",
   "homepage": "https://github.com/rrott/grunt_coffee_chain",
   "author": {
