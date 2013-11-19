@@ -12,14 +12,12 @@
       });
       return this.files.forEach(function(f) {
         var src;
-        src = f.src.filter(function(filepath) {
+        return src = f.src.filter(function(filepath) {
           return validFiles(filepath);
         }).map(function(filepath) {
           generateList(filepath, f.dest, options);
           return grunt.file.read(filepath);
         }).join(options.separator);
-        grunt.file.write(f.dest, src);
-        return grunt.log.writeln("File \"" + f.dest + "\" created.");
       });
     });
     validFiles = function(filepath) {

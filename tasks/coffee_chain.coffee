@@ -18,8 +18,8 @@ module.exports = (grunt) ->
       ).join(options.separator)
 
       #Write the destination file.
-      grunt.file.write f.dest, src
-      grunt.log.writeln "File \"" + f.dest + "\" created."
+      #grunt.file.write f.dest, src
+      #grunt.log.writeln "File \"" + f.dest + "\" created."
 
   validFiles = (filepath)->
     file_exists = grunt.file.exists(filepath)
