@@ -16,18 +16,10 @@ exports.init = (grunt) ->
       extension:  options.extension
       dest:       helper.pathToFolder(filepath)
 
-    grunt.log.writeln "Files: ", filepath, this.requiredFiles( params )
-    grunt.log.writeln "Dirs : ", filepath, this.requiredDirs(  params )
+    grunt.log.writeln "Files: ", filepath, this.requiredFiles( 'file', params )
+    grunt.log.writeln "Dirs : ", filepath, this.requiredFiles( 'dirs', params )
 
-
-  exports.requiredFiles = (options) ->
-    this.requiredThing('file', options)
-
-  exports.requiredDirs = (options) ->
-    this.requiredThing('folder', options)
-
-  exports.requiredThing = (key, options) ->
-    options = {}  unless options
+  exports.requiredFiles = (key, options) ->
     keyword = if key == "file" then options.keyword else options.dirKeyword
     this.generateList(keyword, key, options)
 
@@ -41,7 +33,5 @@ exports.init = (grunt) ->
 
   exports.extension = (key, extension) ->
     if key == "file" then extension else "*"+extension
-
-
 
   exports
