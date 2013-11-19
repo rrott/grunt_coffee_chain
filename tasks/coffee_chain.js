@@ -1,9 +1,9 @@
 (function() {
   "use strict";
   module.exports = function(grunt) {
-    var fileFinder, generateList, pathToFolder, validFiles;
+    var fileFinder;
     fileFinder = require('./lib/file_finder').init(grunt);
-    grunt.registerMultiTask("coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", function() {
+    return grunt.registerMultiTask("coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", function() {
       var options;
       options = this.options({
         keyword: '#= require',
@@ -11,40 +11,8 @@
         extension: '.coffee',
         separator: grunt.util.linefeed
       });
-      return this.files.forEach(function(f) {
-        var src;
-        return src = f.src.filter(function(filepath) {
-          return validFiles(filepath);
-        }).map(function(filepath) {
-          return generateList(filepath, f.dest, options);
-        }).join(options.separator);
-      });
+      return fileFinder.searchFiles(this.files, options);
     });
-    validFiles = function(filepath) {
-      var file_exists;
-      file_exists = grunt.file.exists(filepath);
-      if (!file_exists) {
-        grunt.log.warn("Source file \"" + filepath + "\" not found.");
-      }
-      return file_exists;
-    };
-    generateList = function(filepath, dest, options) {
-      var params;
-      params = {
-        src: grunt.file.read(filepath),
-        keyword: options.keyword,
-        dirKeyword: options.dirKeyword,
-        extension: options.extension,
-        dest: pathToFolder(filepath)
-      };
-      grunt.log.writeln("Files: ", filepath, fileFinder.requiredFiles(params));
-      return grunt.log.writeln("Dirs : ", filepath, fileFinder.requiredDirs(params));
-    };
-    return pathToFolder = function(filepath) {
-      var re;
-      re = new RegExp("^(.*)[/][^/]*$", "");
-      return filepath.replace(re, "$1" + "/");
-    };
   };
 
 }).call(this);

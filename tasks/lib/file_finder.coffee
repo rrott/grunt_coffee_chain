@@ -1,6 +1,24 @@
 "use strict"
 exports.init = (grunt) ->
   exports = {}
+  helper = require('./helpers').init(grunt)
+
+  exports.searchFiles = (files, options) ->
+    for file in files
+      for filepath in helper.getValidPathes(file)
+        this.prepareList(filepath, options)
+
+  exports.prepareList = (filepath, options) ->
+    params =
+      src:        grunt.file.read(filepath)
+      keyword:    options.keyword
+      dirKeyword: options.dirKeyword
+      extension:  options.extension
+      dest:       helper.pathToFolder(filepath)
+
+    grunt.log.writeln "Files: ", filepath, this.requiredFiles( params )
+    grunt.log.writeln "Dirs : ", filepath, this.requiredDirs(  params )
+
 
   exports.requiredFiles = (options) ->
     this.requiredThing('file', options)
@@ -14,17 +32,16 @@ exports.init = (grunt) ->
     this.generateList(keyword, key, options)
 
   exports.generateList = (keyword, key, options) ->
-    re = this.searchRegexp(keyword)
+    re = helper.searchRegexp(keyword)
     listOfFiles = []
     for line in options.src.split('\n')
       listOfFiles.push line.replace re, options.dest + "$1" + this.extension(key, options.extension) if line.match(re)
 
     listOfFiles
 
-  exports.searchRegexp = (keyword) ->
-    new RegExp("^"+keyword+"[ ](.*)$", "")
-
   exports.extension = (key, extension) ->
     if key == "file" then extension else "*"+extension
+
+
 
   exports
