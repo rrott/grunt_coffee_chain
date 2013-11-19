@@ -1,17 +1,17 @@
 (function() {
   "use strict";
   module.exports = function(grunt) {
+    var fileFinder;
+    fileFinder = require('./lib/file_finder').init(grunt);
     return grunt.registerMultiTask("coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", function() {
       var options;
       options = this.options({
         dest: 'dist',
-        staging: 'tmp',
-        src: 'app',
         compile: false,
         clean: false,
-        separator: grunt.util.linefeed,
-        reqKeyword: '#= require',
-        reqDirKeyword: '#= require_tree'
+        keyword: '#= require',
+        dirKeyword: '#= require_tree',
+        separator: grunt.util.linefeed
       });
       return this.files.forEach(function(f) {
         var src;
@@ -23,7 +23,17 @@
           }
           return file_exists;
         }).map(function(filepath) {
-          return grunt.file.read(filepath);
+          var params;
+          src = grunt.file.read(filepath);
+          params = {
+            src: src,
+            keyword: options.keyword,
+            dirKeyword: options.dirKeyword,
+            dest: f.dest
+          };
+          grunt.log.writeln("Files: ", filepath, fileFinder.requiredFiles(params));
+          grunt.log.writeln("Dirs : ", filepath, fileFinder.requiredDirs(params));
+          return src;
         }).join(options.separator);
         grunt.file.write(f.dest, src);
         return grunt.log.writeln("File \"" + f.dest + "\" created.");
