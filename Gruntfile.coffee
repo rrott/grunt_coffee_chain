@@ -34,7 +34,7 @@ module.exports = (grunt) ->
       default_options:
         files:
           "tmp/default_options.coffee":  ["test/fixtures/main.coffee", "test/fixtures/test.coffee"]
-          "tmp/default_options2.coffee": "test/fixtures/*.coffee"
+          #"tmp/default_options2.coffee": "test/fixtures/*.coffee"
 
     # Unit tests.
     nodeunit:
