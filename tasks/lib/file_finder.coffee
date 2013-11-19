@@ -17,7 +17,7 @@ exports.init = (grunt) ->
     re = this.searchRegexp(keyword)
     listOfFiles = []
     for line in options.src.split('\n')
-      listOfFiles.push line.replace re, "$1" + this.extension(key, options.extension) if line.match(re)
+      listOfFiles.push line.replace re, options.dest + "$1" + this.extension(key, options.extension) if line.match(re)
 
     listOfFiles
 

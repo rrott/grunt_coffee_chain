@@ -15,7 +15,6 @@ module.exports = (grunt) ->
         validFiles(filepath)
       ).map((filepath) ->
         generateList(filepath, f.dest, options)
-        grunt.file.read(filepath)
       ).join(options.separator)
 
   validFiles = (filepath)->
@@ -29,12 +28,12 @@ module.exports = (grunt) ->
       keyword:    options.keyword
       dirKeyword: options.dirKeyword
       extension:  options.extension
-      dest:       dest
+      dest:       pathToFolder(filepath)
 
-    grunt.log.writeln "Files: ", pathToFolder(filepath), fileFinder.requiredFiles( params )
-    grunt.log.writeln "Dirs : ", pathToFolder(filepath), fileFinder.requiredDirs(  params )
+    grunt.log.writeln "Files: ", filepath, fileFinder.requiredFiles( params )
+    grunt.log.writeln "Dirs : ", filepath, fileFinder.requiredDirs(  params )
 
   pathToFolder = (filepath)->
     re = new RegExp("^(.*)[/][^/]*$", "")
-    filepath.replace re, "$1"
+    filepath.replace re, "$1" + "/"
 

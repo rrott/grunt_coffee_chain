@@ -16,8 +16,7 @@
         return src = f.src.filter(function(filepath) {
           return validFiles(filepath);
         }).map(function(filepath) {
-          generateList(filepath, f.dest, options);
-          return grunt.file.read(filepath);
+          return generateList(filepath, f.dest, options);
         }).join(options.separator);
       });
     });
@@ -36,15 +35,15 @@
         keyword: options.keyword,
         dirKeyword: options.dirKeyword,
         extension: options.extension,
-        dest: dest
+        dest: pathToFolder(filepath)
       };
-      grunt.log.writeln("Files: ", pathToFolder(filepath), fileFinder.requiredFiles(params));
-      return grunt.log.writeln("Dirs : ", pathToFolder(filepath), fileFinder.requiredDirs(params));
+      grunt.log.writeln("Files: ", filepath, fileFinder.requiredFiles(params));
+      return grunt.log.writeln("Dirs : ", filepath, fileFinder.requiredDirs(params));
     };
     return pathToFolder = function(filepath) {
       var re;
       re = new RegExp("^(.*)[/][^/]*$", "");
-      return filepath.replace(re, "$1");
+      return filepath.replace(re, "$1" + "/");
     };
   };
 
