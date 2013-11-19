@@ -12,8 +12,8 @@ exports.init = (grunt) ->
     options.src  = grunt.file.read(filepath)
     options.dest = helper.pathToFolder(filepath)
 
-    grunt.log.writeln "Files: ", filepath, this.requiredFiles( 'file', options )
-    grunt.log.writeln "Dirs : ", filepath, this.requiredFiles( 'dirs', options )
+    grunt.log.writeln "Files: ", filepath, this.requiredFiles('file', options )
+    grunt.log.writeln "Dirs : ", filepath, this.requiredFiles('dirs', options )
 
   exports.requiredFiles = (key, options) ->
     keyword = if key == "file" then options.keyword else options.dirKeyword
@@ -23,11 +23,11 @@ exports.init = (grunt) ->
     re = helper.searchRegexp(keyword)
     listOfFiles = []
     for line in options.src.split('\n')
-      listOfFiles.push line.replace re, options.dest + "$1" + this.extension(key, options.extension) if line.match(re)
+      listOfFiles.push
+        line.replace
+          re
+          options.dest + "$1" + helper.extension(key, options.extension) if line.match(re)
 
     listOfFiles
-
-  exports.extension = (key, extension) ->
-    if key == "file" then extension else "*"+extension
 
   exports
