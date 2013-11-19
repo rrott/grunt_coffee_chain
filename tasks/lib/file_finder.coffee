@@ -23,11 +23,8 @@ exports.init = (grunt) ->
     re = helper.searchRegexp(keyword)
     listOfFiles = []
     for line in options.src.split('\n')
-      listOfFiles.push
-        line.replace
-          re
-          options.dest + "$1" + helper.extension(key, options.extension) if line.match(re)
-
+      if line.match(re)
+        listOfFiles.push line.replace re, options.dest + "$1" + helper.extension(key, options.extension)
     listOfFiles
 
   exports
