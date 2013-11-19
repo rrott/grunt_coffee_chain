@@ -22,7 +22,7 @@ module.exports = (grunt) ->
 
 
     # Configuration to be run (and then tested).
-    coffee_chain:
+    coffeeChain:
       default_options:
         options: {}
         files:
@@ -64,7 +64,7 @@ module.exports = (grunt) ->
 
   # Whenever the "test" task is run, first clean the "tmp" dir, then run this
   # plugin's task(s), then test the result.
-  grunt.registerTask "test", ["clean", "coffee", "coffee_chain", "nodeunit"]
+  grunt.registerTask "test", ["clean", "coffee", "coffeeChain", "nodeunit"]
 
   # By default, lint and run all tests.
   grunt.registerTask "default", ["coffee", "jshint", "test"]

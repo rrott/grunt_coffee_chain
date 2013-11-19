@@ -1,7 +1,7 @@
 (function() {
   "use strict";
   module.exports = function(grunt) {
-    return grunt.registerMultiTask("coffee_chain", "grunt's plugin to concat coffeescripts using include derective", function() {
+    return grunt.registerMultiTask("coffeeChain", "grunt's plugin to concat coffeescripts using include derective", function() {
       var clean, compile, dest, options, root, staging;
       options = this.options({
         punctuation: ".",

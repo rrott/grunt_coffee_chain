@@ -4,7 +4,7 @@
 
   grunt = require("grunt");
 
-  exports.coffee_chain = {
+  exports.coffeeChain = {
     setUp: function(done) {
       return done();
     },

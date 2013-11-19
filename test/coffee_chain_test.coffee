@@ -20,7 +20,7 @@ grunt = require("grunt")
 #    test.doesNotThrow(block, [error], [message])
 #    test.ifError(value)
 #
-exports.coffee_chain =
+exports.coffeeChain =
   setUp: (done) ->
 
     # setup here if necessary
