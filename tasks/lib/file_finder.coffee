@@ -9,15 +9,11 @@ exports.init = (grunt) ->
         this.prepareList(filepath, options)
 
   exports.prepareList = (filepath, options) ->
-    params =
-      src:        grunt.file.read(filepath)
-      keyword:    options.keyword
-      dirKeyword: options.dirKeyword
-      extension:  options.extension
-      dest:       helper.pathToFolder(filepath)
+    options.src  = grunt.file.read(filepath)
+    options.dest = helper.pathToFolder(filepath)
 
-    grunt.log.writeln "Files: ", filepath, this.requiredFiles( 'file', params )
-    grunt.log.writeln "Dirs : ", filepath, this.requiredFiles( 'dirs', params )
+    grunt.log.writeln "Files: ", filepath, this.requiredFiles( 'file', options )
+    grunt.log.writeln "Dirs : ", filepath, this.requiredFiles( 'dirs', options )
 
   exports.requiredFiles = (key, options) ->
     keyword = if key == "file" then options.keyword else options.dirKeyword
