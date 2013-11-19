@@ -13,16 +13,18 @@ exports.init = (grunt) ->
     keyword = if key == "file" then options.keyword else options.dirKeyword
     this.generateList(keyword, key, options)
 
-  exports.searchRegexp = (keyword) ->
-    new RegExp("^"+keyword+"[ ](.*)$", "")
-
   exports.generateList = (keyword, key, options) ->
     re = this.searchRegexp(keyword)
     listOfFiles = []
-    extension = if key == "file" then '.js' else ""
     for line in options.src.split('\n')
-      if line.match(re)
-        listOfFiles.push line.replace re, "$1" + extension
+      listOfFiles.push line.replace re, "$1" + this.extension(key) if line.match(re)
 
     listOfFiles
+
+  exports.searchRegexp = (keyword) ->
+    new RegExp("^"+keyword+"[ ](.*)$", "")
+
+  exports.extension = (key) ->
+    if key == "file" then '.js' else ""
+
   exports

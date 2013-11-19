@@ -15,23 +15,27 @@ module.exports = (grunt) ->
 
     @files.forEach (f) ->
       src = f.src.filter((filepath) ->
-        file_exists = grunt.file.exists(filepath)
-        if not file_exists then grunt.log.warn "Source file \"" + filepath + "\" not found."
-        file_exists
+        validFiles(filepath)
       ).map((filepath) ->
-        src = grunt.file.read(filepath)
-        params =
-          src:      src
-          keyword:  options.keyword
-          dirKeyword:  options.dirKeyword
-          dest: f.dest
-
-        grunt.log.writeln "Files: ", filepath, fileFinder.requiredFiles( params )
-        grunt.log.writeln "Dirs : ", filepath, fileFinder.requiredDirs(  params )
-
-        src
+        generateList(filepath, f.dest, options)
+        grunt.file.read(filepath)
       ).join(options.separator)
 
       #Write the destination file.
       grunt.file.write f.dest, src
       grunt.log.writeln "File \"" + f.dest + "\" created."
+
+  validFiles = (filepath)->
+    file_exists = grunt.file.exists(filepath)
+    if not file_exists then grunt.log.warn "Source file \"" + filepath + "\" not found."
+    file_exists
+
+  generateList = (filepath, dest, options) ->
+    params =
+      src:        grunt.file.read(filepath)
+      keyword:    options.keyword
+      dirKeyword: options.dirKeyword
+      dest:       dest
+
+    grunt.log.writeln "Files: ", filepath, fileFinder.requiredFiles( params )
+    grunt.log.writeln "Dirs : ", filepath, fileFinder.requiredDirs(  params )
