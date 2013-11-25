@@ -5,30 +5,25 @@ exports.init = (grunt) ->
 
   exports.searchFiles = (files, options) ->
     #console.log  files
-    listOfFiles = []
     for file in files
+      console.log file.src
       for filepath in helper.getValidPathes(file)
-        console.log  this.prepareList(filepath, options)
-    console.log listOfFiles
+        this.prepareList(filepath, options)
 
   exports.prepareList = (filepath, options) ->
     options.src  = grunt.file.read(filepath)
     options.dest = helper.pathToFolder(filepath)
-    files = this.requiredFiles('file', options )
-    if files.length
-      this.searchFiles(
-        [
-          {
-            src: files
-            dest: filepath
-            orig: {
-              src: files
-              dest: filepath
-            }
-          }
-        ]
-        options
-      )
+
+    console.log "new\n", [
+      {
+        src: this.requiredFiles('file', options )
+        dest: filepath
+        orig: {
+          src:  this.requiredFiles('file', options ),
+          dest: filepath
+        }
+      }
+    ]
     #grunt.log.writeln "Dirs : ", filepath, this.requiredFiles('dirs', options )
 
 #[ { src: [Getter],

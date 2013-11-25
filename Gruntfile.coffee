@@ -34,6 +34,8 @@ module.exports = (grunt) ->
       default_options:
         files:
           "tmp/default_options.coffee":  ["test/fixtures/main.coffee", "test/fixtures/test.coffee"]
+          #both main and test.cofee are not related with each ther and resulted js will be added to html
+          # as 2 different files
           #"tmp/default_options2.coffee": "test/fixtures/*.coffee"
 
     # Unit tests.

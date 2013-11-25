@@ -4,7 +4,8 @@
     var fileFinder;
     fileFinder = require('./lib/file_finder').init(grunt);
     return grunt.registerMultiTask("coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", function() {
-      var options;
+      var debug, options;
+      debug = require('debug')('coffeeChain:coffeeChain');
       options = this.options({
         keyword: '#= require',
         dirKeyword: '#= require_tree',
