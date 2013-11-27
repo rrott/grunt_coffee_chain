@@ -42,7 +42,7 @@ module.exports = (grunt) ->
         sourceMap: true
       compile:
         files:
-          'tasks/coffee_chain.js': 'tasks/*.coffee'
+          'tasks/coffee_chain.js': 'tasks/**/*.coffee'
       test:
         files:
           'test/coffee_chain_test.js': 'test/coffee_chain_test.coffee'
