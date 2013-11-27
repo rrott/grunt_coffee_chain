@@ -1,7 +1,7 @@
 {
   "name": "grunt-coffee-chain",
   "description": "grunt's task for concatenating CoffeeScript files that have 'require' directive  using Snockets",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "homepage": "https://github.com/rrott/grunt_coffee_chain",
   "author": {
     "name": "Roman Rott (rrott)",
