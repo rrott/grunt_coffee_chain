@@ -24,7 +24,7 @@ In your project's Gruntfile, add a section named `coffee_chain` to the data obje
 
 ```js
 grunt.initConfig({
-  coffee_chain: {
+  coffeeChain: {
     options: {
       // Task-specific options go here.
     },
@@ -36,18 +36,7 @@ grunt.initConfig({
 ```
 
 ### Options
-
-#### options.separator
-Type: `String`
-Default value: `',  '`
-
-A string value that is used to do something with whatever.
-
-#### options.punctuation
-Type: `String`
-Default value: `'.'`
-
-A string value that is used to do something else with whatever else.
+_(not yet implemented)_
 
 ### Usage Examples
 
@@ -56,34 +45,18 @@ In this example, the default options are used to do something with whatever. So 
 
 ```js
 grunt.initConfig({
-  coffee_chain: {
+  coffeeChain: {
     options: {},
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
-  },
-})
-```
-
-#### Custom Options
-In this example, custom options are used to do something else with whatever else. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result in this case would be `Testing: 1 2 3 !!!`
-
-```js
-grunt.initConfig({
-  coffee_chain: {
-    options: {
-      separator: ': ',
-      punctuation: ' !!!',
-    },
-    files: {
-      'dest/default_options': ['src/testing', 'src/123'],
-    },
+    your_target: {
+      src:  'app/assets/javascripts/main.coffee',
+      dest: 'public/assets/app.js'
+    }
   },
 })
 ```
 
 ## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+I am using coffeescript for this, so pull requests to js files will not be accepted. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
-_(Nothing yet)_
+version 0.0.1 - first release published to npm.
