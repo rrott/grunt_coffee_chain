@@ -15,11 +15,9 @@ module.exports = (grunt) ->
       options:
         jshintrc: ".jshintrc"
 
-
     # Before generating any new files, remove any previously-created files.
     clean:
       tests: ["tmp"]
-
 
     # Configuration to be run (and then tested).
     coffeeChain:
@@ -32,11 +30,8 @@ module.exports = (grunt) ->
       #    "tmp/default_options": ["test/fixtures/testing", "test/fixtures/123"]
 
       default_options:
-        files:
-          "tmp/default_options.coffee":  ["test/fixtures/main.coffee", "test/fixtures/test.coffee"]
-          #both main and test.cofee are not related with each ther and resulted js will be added to html
-          # as 2 different files
-          #"tmp/default_options2.coffee": "test/fixtures/*.coffee"
+        src: "test/fixtures/default_options.coffee"
+        dest: "tmp/default_options.js"
 
     # Unit tests.
     nodeunit:
@@ -61,7 +56,6 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks "grunt-contrib-nodeunit"
   grunt.loadNpmTasks "grunt-contrib-coffee"
   #grunt.loadNpmTasks "grunt-shell"
-  #grunt.loadNpmTasks 'grunt-concurrent'
 
   # Whenever the "test" task is run, first clean the "tmp" dir, then run this
   # plugin's task(s), then test the result.

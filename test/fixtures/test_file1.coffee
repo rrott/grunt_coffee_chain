@@ -1,1 +1,1 @@
-test file 1
+class Test1
