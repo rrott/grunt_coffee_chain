@@ -46,6 +46,11 @@ module.exports = (grunt) ->
       test:
         files:
           'test/coffee_chain_test.js': 'test/coffee_chain_test.coffee'
+      grunt:
+        options:
+          sourceMap: false
+        files:
+          'Gruntfile.js': 'Gruntfile.coffee'
 
   # Actually load this plugin's task(s).
   grunt.loadTasks "tasks"
