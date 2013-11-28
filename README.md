@@ -99,7 +99,7 @@ grunt.initConfig
     dist:
       options:
         minify: true
-        clean: trye
+        clean: true
       src: "app/main.coffee"
       dest: "dist/index.js"
 ```
@@ -107,7 +107,7 @@ grunt.initConfig
 ## Contributing
 This application is written in CoffeeScript with sprockets-style comments to indicate dependencies and so
 
-it compiles itself to itself.
+    it compiles itself to js using itself.
 
 Due to above pull requests to compiled js files will not be accepted(CoffeeScripts only). Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
