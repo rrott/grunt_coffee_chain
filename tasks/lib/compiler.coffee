@@ -1,26 +1,28 @@
-"use strict"
-exports.init = (grunt) ->
-  exports = {}
-  helper   = require('./helpers').init(grunt)
-  snockets = new (require("snockets"))()
-  path     = require("path")
+#= require ./helpers
 
-  exports.proceed = (files, options) ->
-    helper.isAvaliable files.length
-    for file in files
-      this.prepareList file
+class root.Compiler
+  constructor: (options) ->
+    @snockets = new (require("snockets"))()
+    @helper   = new root.Helpers()
+    @path     = require("path")
+    @options  = options
 
-  exports.prepareList = (files) ->
-    helper.isAvaliable files.dest
-    for file in files.src
-      this.compile file, files.dest
-
-  exports.compile = (file, dest) ->
-    js = snockets.getConcatenation(
+  compileFile: (file, dest) ->
+    result = @snockets.getConcatenation(
       file
       async: false
+      minify: @options.minify
     )
 
-    grunt.file.write path.resolve(dest), js
+    this.writeToFile dest, result
 
-  exports
+  compile: (files) ->
+    @helper.isAvaliable files.dest
+    for file in files.src
+      this.compileFile file, files.dest
+
+  writeToFile: (file, result) ->
+    @options.grunt.file.write(
+      @path.resolve file
+      result
+    )
