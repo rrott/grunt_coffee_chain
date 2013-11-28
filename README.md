@@ -1,8 +1,17 @@
 # grunt-coffee-chain
 
-> grunt's plugin to concat coffeescripts using include derective"
+> grunt plugin inspired by Sprockets to compile chain of CoffeeScript in the way Rails 3.1's asset pipeline do compile.
 
-## Getting Started
+## Usage (script-side)
+In your CoffeeScript files, write Sprockets-style comments to indicate dependencies, e.g.
+
+    #= require dependency
+
+If you want to bring in a whole folder of scripts, use
+
+    #= require_tree dir
+
+## Usage (grunt-side)
 This plugin requires Grunt `~0.4.1`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
@@ -17,17 +26,14 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-coffee-chain');
 ```
 
-## The "coffee_chain" task
+## The "coffeeChain" task
 
 ### Overview
-In your project's Gruntfile, add a section named `coffee_chain` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `coffeeChain` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
   coffeeChain: {
-    options: {
-      // Task-specific options go here.
-    },
     your_target: {
       // Target-specific file lists and/or options go here.
     },
@@ -36,12 +42,24 @@ grunt.initConfig({
 ```
 
 ### Options
-_(not yet implemented)_
+
+#### options.minify
+Type: `Booleann`
+Default value: `false`
+
+A boolean value that is used to set trigger to minify resulting js file.
+
+#### options.clean
+_(Not yet implemented)_
+Type: `Booleann`
+Default value: `false`
+
+A boolean value that is used to clean resulting CoffeeScript from useless code that coffee compiler adds.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In this example, the default options are used to compile coffee scripts to js without minifying and cleaning them`
 
 ```js
 grunt.initConfig({
@@ -55,8 +73,43 @@ grunt.initConfig({
 })
 ```
 
+#### Custom Options
+In this example, the custom options are used to compile coffee scripts to js minifying and cleaning them`
+
+```js
+grunt.initConfig({
+  coffeeChain: {
+    your_target: {
+      options: {
+        minify: true,
+        clean: trye
+      },
+      src:  'app/assets/javascripts/main.coffee',
+      dest: 'public/assets/app.js'
+    }
+  },
+})
+```
+
+### Usage Examples
+
+#### Default Options
+In this example, the custom options are used to compile coffee scripts to js minifying and cleaning them`
+
+```coffee
+grunt.initConfig
+  coffeeChain:
+    dist:
+      options:
+        minify: true
+      src: "app/main.coffee"
+      dest: "dist/index.js"
+```
+
 ## Contributing
-I am using coffeescript for this, so pull requests to js files will not be accepted. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+I am using CoffeeScript for this, so pull requests to js files will not be accepted. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 version 0.0.1 - first release published to npm.
+version 0.1.0 - added custom minify option
+version 0.1.1 - refactored version that compiles itself to itself
