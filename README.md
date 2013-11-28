@@ -1,6 +1,6 @@
 # grunt-coffee-chain
 
-> grunt plugin inspired by Sprockets to compile chain of CoffeeScript in the way Rails 3.1's asset pipeline do compile.
+> grunt plugin inspired by Sprockets to compile CoffeeScripts that has sprockets-style comments to indicate dependencies.
 
 ## Usage (script-side)
 In your CoffeeScript files, write Sprockets-style comments to indicate dependencies, e.g.
@@ -74,15 +74,14 @@ grunt.initConfig({
 ```
 
 #### Custom Options
-In this example, the custom options are used to compile coffee scripts to js minifying and cleaning them`
+In this example, the custom options are used to compile coffee scripts to js minifying but not cleaning them`
 
 ```js
 grunt.initConfig({
   coffeeChain: {
     your_target: {
       options: {
-        minify: true,
-        clean: trye
+        minify: true
       },
       src:  'app/assets/javascripts/main.coffee',
       dest: 'public/assets/app.js'
@@ -91,9 +90,7 @@ grunt.initConfig({
 })
 ```
 
-### Usage Examples
-
-#### Default Options
+#### CoffeeScript Examples
 In this example, the custom options are used to compile coffee scripts to js minifying and cleaning them`
 
 ```coffee
@@ -102,14 +99,21 @@ grunt.initConfig
     dist:
       options:
         minify: true
+        clean: trye
       src: "app/main.coffee"
       dest: "dist/index.js"
 ```
 
 ## Contributing
-I am using CoffeeScript for this, so pull requests to js files will not be accepted. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+This application is written in CoffeeScript with sprockets-style comments to indicate dependencies and so
+
+it compiles itself to itself.
+
+Due to above pull requests to compiled js files will not be accepted(CoffeeScripts only). Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
 ## Release History
 version 0.0.1 - first release published to npm.
+
 version 0.1.0 - added custom minify option
+
 version 0.1.1 - refactored version that compiles itself to itself
