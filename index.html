@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
+
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>Grunt coffee chain by rrott</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/rrott/grunt_coffee_chain">View on GitHub</a>
+    <div class="shell">
+
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>Grunt coffee chain</h1>
+            <h2>grunt coffee compiler</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
+
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/rrott/grunt_coffee_chain/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/rrott/grunt_coffee_chain/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
+
+
+      <span class="banner-fix"></span>
+
+
+      <section id="main_content">
+        <h1>
+<a name="grunt-coffee-chain" class="anchor" href="#grunt-coffee-chain"><span class="octicon octicon-link"></span></a>grunt-coffee-chain</h1>
+
+<blockquote>
+<p>grunt plugin inspired by Sprockets to compile CoffeeScripts that has sprockets-style comments to indicate dependencies.</p>
+</blockquote>
+
+<h2>
+<a name="usage-script-side" class="anchor" href="#usage-script-side"><span class="octicon octicon-link"></span></a>Usage (script-side)</h2>
+
+<p>In your CoffeeScript files, write Sprockets-style comments to indicate dependencies, e.g.</p>
+
+<pre><code>#= require dependency
+</code></pre>
+
+<p>If you want to bring in a whole folder of scripts, use</p>
+
+<pre><code>#= require_tree dir
+</code></pre>
+
+<h2>
+<a name="usage-grunt-side" class="anchor" href="#usage-grunt-side"><span class="octicon octicon-link"></span></a>Usage (grunt-side)</h2>
+
+<p>This plugin requires Grunt <code>~0.4.1</code></p>
+
+<p>If you haven't used <a href="http://gruntjs.com/">Grunt</a> before, be sure to check out the <a href="http://gruntjs.com/getting-started">Getting Started</a> guide, as it explains how to create a <a href="http://gruntjs.com/sample-gruntfile">Gruntfile</a> as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:</p>
+
+<pre lang="shell"><code>npm install grunt-coffee-chain --save-dev
+</code></pre>
+
+<p>Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">'grunt-coffee-chain'</span><span class="p">);</span>
+</pre></div>
+
+<h2>
+<a name="the-coffeechain-task" class="anchor" href="#the-coffeechain-task"><span class="octicon octicon-link"></span></a>The "coffeeChain" task</h2>
+
+<h3>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h3>
+
+<p>In your project's Gruntfile, add a section named <code>coffeeChain</code> to the data object passed into <code>grunt.initConfig()</code>.</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+  <span class="nx">coffeeChain</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">your_target</span><span class="o">:</span> <span class="p">{</span>
+      <span class="c1">// Target-specific file lists and/or options go here.</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">})</span>
+</pre></div>
+
+<h3>
+<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h3>
+
+<h4>
+<a name="optionsminify" class="anchor" href="#optionsminify"><span class="octicon octicon-link"></span></a>options.minify</h4>
+
+<p>Type: <code>Booleann</code>
+Default value: <code>false</code></p>
+
+<p>A boolean value that is used to set trigger to minify resulting js file.</p>
+
+<h4>
+<a name="optionsclean" class="anchor" href="#optionsclean"><span class="octicon octicon-link"></span></a>options.clean</h4>
+
+<p><em>(Not yet implemented)</em>
+Type: <code>Booleann</code>
+Default value: <code>false</code></p>
+
+<p>A boolean value that is used to clean resulting CoffeeScript from useless code that coffee compiler adds.</p>
+
+<h3>
+<a name="usage-examples" class="anchor" href="#usage-examples"><span class="octicon octicon-link"></span></a>Usage Examples</h3>
+
+<h4>
+<a name="default-options" class="anchor" href="#default-options"><span class="octicon octicon-link"></span></a>Default Options</h4>
+
+<p>In this example, the default options are used to compile coffee scripts to js without minifying and cleaning them`</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+  <span class="nx">coffeeChain</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="nx">your_target</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">src</span><span class="o">:</span>  <span class="s1">'app/assets/javascripts/main.coffee'</span><span class="p">,</span>
+      <span class="nx">dest</span><span class="o">:</span> <span class="s1">'public/assets/app.js'</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+<span class="p">})</span>
+</pre></div>
+
+<h4>
+<a name="custom-options" class="anchor" href="#custom-options"><span class="octicon octicon-link"></span></a>Custom Options</h4>
+
+<p>In this example, the custom options are used to compile coffee scripts to js minifying but not cleaning them`</p>
+
+<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+  <span class="nx">coffeeChain</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">your_target</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">minify</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nx">src</span><span class="o">:</span>  <span class="s1">'app/assets/javascripts/main.coffee'</span><span class="p">,</span>
+      <span class="nx">dest</span><span class="o">:</span> <span class="s1">'public/assets/app.js'</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+<span class="p">})</span>
+</pre></div>
+
+<h4>
+<a name="coffeescript-examples" class="anchor" href="#coffeescript-examples"><span class="octicon octicon-link"></span></a>CoffeeScript Examples</h4>
+
+<p>In this example, the custom options are used to compile coffee scripts to js minifying and cleaning them`</p>
+
+<div class="highlight highlight-coffee"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span>
+  <span class="nv">coffeeChain:</span>
+    <span class="nv">dist:</span>
+      <span class="nv">options:</span>
+        <span class="nv">minify: </span><span class="kc">true</span>
+        <span class="nv">clean: </span><span class="kc">true</span>
+      <span class="nv">src: </span><span class="s">"app/main.coffee"</span>
+      <span class="nv">dest: </span><span class="s">"dist/index.js"</span>
+</pre></div>
+
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>This application is written in CoffeeScript with sprockets-style comments to indicate dependencies and so</p>
+
+<pre><code>it compiles itself to js using itself.
+</code></pre>
+
+<p>Due to above pull requests to compiled js files will not be accepted(CoffeeScripts only). Add unit tests for any new or changed functionality. Lint and test your code using <a href="http://gruntjs.com/">Grunt</a>.</p>
+
+<h2>
+<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
+
+<p>version 0.0.1 - first release published to npm.</p>
+
+<p>version 0.1.0 - added custom minify option</p>
+
+<p>version 0.1.1 - refactored version that compiles itself to itself</p>
+      </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/rrott">rrott</a> can be found on <a href="https://github.com/rrott/grunt_coffee_chain">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-47286754-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
