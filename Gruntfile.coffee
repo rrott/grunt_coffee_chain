@@ -10,28 +10,20 @@ module.exports = (grunt) ->
 
   # Project configuration.
   grunt.initConfig
-    jshint:
-      all: ["Gruntfile.js", "tasks/*.js", "<%= nodeunit.tests %>"]
-      options:
-        jshintrc: ".jshintrc"
-
     # Before generating any new files, remove any previously-created files.
     clean:
       tests: ["tmp"]
 
     # Configuration to be run (and then tested).
     coffeeChain:
-      #custom_options:
-      #  options: {}
-      #    keyword:    '#= require'
-      #    dirKeyword: '#= require_tree'
-      #    extension:  '.js.coffee'
-      #  files:
-      #    "tmp/default_options": ["test/fixtures/testing", "test/fixtures/123"]
-
       default_options:
         src: "test/fixtures/default_options.coffee"
         dest: "tmp/default_options.js"
+      custom_options:
+        options:
+          minify: true
+        src: "test/fixtures/default_options.coffee"
+        dest: "tmp/custom_options.js"
 
     # Unit tests.
     nodeunit:
@@ -59,7 +51,6 @@ module.exports = (grunt) ->
   grunt.loadTasks "tasks"
 
   # These plugins provide necessary tasks.
-  grunt.loadNpmTasks "grunt-contrib-jshint"
   grunt.loadNpmTasks "grunt-contrib-clean"
   grunt.loadNpmTasks "grunt-contrib-nodeunit"
   grunt.loadNpmTasks "grunt-contrib-coffee"
