@@ -5,12 +5,7 @@
     compiler = require('./lib/compiler').init(grunt);
     return grunt.registerMultiTask("coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", function() {
       var options;
-      options = this.options({
-        keyword: '#= require',
-        dirKeyword: '#= require_tree',
-        extension: '.coffee',
-        separator: grunt.util.linefeed
-      });
+      options = this.options();
       return compiler.proceed(this.files, options);
     });
   };

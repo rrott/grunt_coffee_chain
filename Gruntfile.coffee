@@ -19,11 +19,9 @@ module.exports = (grunt) ->
       default_options:
         src: "test/fixtures/default_options.coffee"
         dest: "tmp/default_options.js"
-      custom_options:
-        options:
-          minify: true
-        src: "test/fixtures/default_options.coffee"
-        dest: "tmp/custom_options.js"
+      #custom_options:
+      #  src: "test/fixtures/default_options.coffee"
+      #  dest: "tmp/custom_options.js"
 
     # Unit tests.
     nodeunit:
