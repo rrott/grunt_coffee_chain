@@ -9,8 +9,9 @@ module.exports = (grunt) ->
       dirKeyword: '#= require_tree'
       extension:  '.coffee'
       separator:  grunt.util.linefeed
-
+      minify:     false
     )
 
     compiler.proceed(@files, options)
+
 
