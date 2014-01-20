@@ -17,10 +17,6 @@
           src: 'test/coffee_chain_test.coffee',
           dest: 'test/coffee_chain_test.js'
         },
-        compileGruntfile: {
-          src: 'Gruntfile.coffee',
-          dest: 'Gruntfile.js'
-        },
         default_options: {
           src: "test/fixtures/default_options.coffee",
           dest: "tmp/default_options.js"
