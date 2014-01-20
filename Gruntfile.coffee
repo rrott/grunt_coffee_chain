@@ -28,6 +28,9 @@ module.exports = (grunt) ->
       test:
         src: 'test/coffee_chain_test.coffee'
         dest: 'test/coffee_chain_test.js'
+      compileGruntfile:
+        src:  'Gruntfile.coffee'
+        dest: 'Gruntfile.js'
 
       # Configuration to be run (and then tested).
       default_options:
