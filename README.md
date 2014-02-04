@@ -60,3 +60,7 @@ I am using coffeescript for this, so pull requests to js files will not be accep
 
 ## Release History
 version 0.0.1 - first release published to npm.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rrott/grunt_coffee_chain/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
