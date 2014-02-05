@@ -1,18 +1,17 @@
-#= require ./helpers
+#= require ./helper
 class root.Compiler
   constructor: (grunt) ->
     @snockets = new (require("snockets"))()
-    @helper   = new root.Helper(@grunt)
+    @helper   = new root.Helper(grunt)
     @path     = require("path")
     @grunt    = grunt
 
   proceed: (files) ->
-    @helper.isAvaliable files.length
     for file in files
+      @helper.checkFiles(file)
       this.prepareList file
 
   prepareList: (files) ->
-    @helper.isAvaliable files.dest
     for file in files.src
       this.compile file, files.dest
 
@@ -22,5 +21,8 @@ class root.Compiler
       async: false
     )
 
-    @grunt.file.write @path.resolve(dest), js
+    @grunt.file.write(
+      @path.resolve(dest)
+      js
+    )
 

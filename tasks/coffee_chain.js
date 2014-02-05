@@ -4,24 +4,27 @@
       this.grunt = grunt;
     }
 
-    Helper.prototype.validateFiles = function(filepath) {
-      var file_exists;
-      file_exists = this.grunt.file.exists(filepath);
-      if (!file_exists) {
-        this.grunt.log.warn("Source file \"" + filepath + "\" not found.");
-      }
-      return file_exists;
-    };
-
     Helper.prototype.isAvaliable = function(avaliable) {
       if (!avaliable) {
-        this.showError("You should provide existant files in the Gruntfile");
-        return avaliable;
+        return this.showError();
       }
     };
 
-    Helper.prototype.showError = function(error) {
-      return this.grunt.log.error(error);
+    Helper.prototype.checkFiles = function(files) {
+      this._checkFile(files.src);
+      return this._checkFile(files.dest);
+    };
+
+    Helper.prototype.showError = function() {
+      return this.grunt.warn('You should provide "src" and "dest" params in the Gruntfile');
+    };
+
+    Helper.prototype._checkFile = function(files) {
+      if (files != null) {
+        return this.isAvaliable(files.length);
+      } else {
+        return this.showError();
+      }
     };
 
     return Helper;
@@ -34,17 +37,17 @@
   root.Compiler = (function() {
     function Compiler(grunt) {
       this.snockets = new (require("snockets"))();
-      this.helper = new root.Helper(this.grunt);
+      this.helper = new root.Helper(grunt);
       this.path = require("path");
       this.grunt = grunt;
     }
 
     Compiler.prototype.proceed = function(files) {
       var file, _i, _len, _results;
-      this.helper.isAvaliable(files.length);
       _results = [];
       for (_i = 0, _len = files.length; _i < _len; _i++) {
         file = files[_i];
+        this.helper.checkFiles(file);
         _results.push(this.prepareList(file));
       }
       return _results;
@@ -52,7 +55,6 @@
 
     Compiler.prototype.prepareList = function(files) {
       var file, _i, _len, _ref, _results;
-      this.helper.isAvaliable(files.dest);
       _ref = files.src;
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -77,7 +79,6 @@
 }).call(this);
 
 (function() {
-  "use strict";
   module.exports = function(grunt) {
     var compiler;
     compiler = new root.Compiler(grunt);
