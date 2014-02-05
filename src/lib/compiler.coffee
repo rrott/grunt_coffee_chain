@@ -1,28 +1,30 @@
 #= require ./helpers
+class root.Compiler
+  constructor: ->
+    @snockets = new (require("snockets"))()
+    @path     = require("path")
 
-#class root.Compiler
-#  constructor: (options) ->
-#    @snockets = new (require("snockets"))()
-#    @helper   = new root.Helpers()
-#    @path     = require("path")
-#    @options  = options
+  initialize: (options) ->
+    @grunt = options.grunt
+    @files = options.files
+    @helper   = new root.Helper(options)
 
-#  compileFile: (file, dest) ->
-#    result = @snockets.getConcatenation(
-#      file
-#      async: false
-#      minify: @options.minify
-#    )
-#
-#    this.writeToFile dest, result
+  proceed: (options) ->
+    this.initialize(options)
+    @helper.isAvaliable @files.length
+    for file in @files
+      this.prepareList file
 
-#  compile: (files) ->
-#    @helper.isAvaliable files.dest
-#    for file in files.src
-#      this.compileFile file, files.dest
+  prepareList: (files) ->
+    @helper.isAvaliable @files.dest
+    for file in files.src
+      this.compile file, @files.dest
 
-#  writeToFile: (file, result) ->
-#    @options.grunt.file.write(
-#      @path.resolve file
-#      result
-#    )
+  compile: (file, dest) ->
+    js = @snockets.getConcatenation(
+      file
+      async: false
+    )
+
+    @grunt.file.write @path.resolve(dest), js
+

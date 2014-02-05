@@ -12,6 +12,9 @@
           dest: 'tasks/coffee_chain.js'
         },
         default_options: {
+          options: {
+            minify: true
+          },
           src: 'test/fixtures/default_options.coffee',
           dest: 'tmp/default_options.js'
         },
