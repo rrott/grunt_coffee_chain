@@ -1,30 +1,30 @@
 (function() {
-  root.Helpers = (function() {
-    function Helpers(options) {
-      this.grunt = options.grunt;
+  root.Helper = (function() {
+    function Helper(grunt) {
+      this.grunt = grunt;
     }
 
-    Helpers.prototype.validateFiles = function(filepath) {
+    Helper.prototype.validateFiles = function(filepath) {
       var file_exists;
-      file_exists = grunt.file.exists(filepath);
+      file_exists = this.grunt.file.exists(filepath);
       if (!file_exists) {
         this.grunt.log.warn("Source file \"" + filepath + "\" not found.");
       }
       return file_exists;
     };
 
-    Helpers.prototype.isAvaliable = function(avaliable) {
+    Helper.prototype.isAvaliable = function(avaliable) {
       if (!avaliable) {
         this.showError("You should provide existant files in the Gruntfile");
         return avaliable;
       }
     };
 
-    Helpers.prototype.showError = function(error) {
+    Helper.prototype.showError = function(error) {
       return this.grunt.log.error(error);
     };
 
-    return Helpers;
+    return Helper;
 
   })();
 
@@ -32,20 +32,15 @@
 
 (function() {
   root.Compiler = (function() {
-    function Compiler() {}
-
-    Compiler.prototype.initialize = function(options) {
-      console.log('tt');
+    function Compiler(grunt) {
       this.snockets = new (require("snockets"))();
-      this.helper = new root.Helper(options);
+      this.helper = new root.Helper(this.grunt);
       this.path = require("path");
-      this.grunt = options.grunt;
-      return this.files = options.files;
-    };
+      this.grunt = grunt;
+    }
 
-    Compiler.prototype.proceed = function() {
+    Compiler.prototype.proceed = function(files) {
       var file, _i, _len, _results;
-      console.log('files');
       this.helper.isAvaliable(files.length);
       _results = [];
       for (_i = 0, _len = files.length; _i < _len; _i++) {
@@ -62,7 +57,7 @@
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         file = _ref[_i];
-        _results.push(this.compile(file, this.files.dest));
+        _results.push(this.compile(file, files.dest));
       }
       return _results;
     };
@@ -85,16 +80,9 @@
   "use strict";
   module.exports = function(grunt) {
     var compiler;
-    compiler = new root.Compiler();
+    compiler = new root.Compiler(grunt);
     return grunt.registerMultiTask("coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", function() {
-      var options;
-      options = this.options({
-        grunt: grunt,
-        files: this.files
-      });
-      compiler.initialize(options);
-      compiler.proceed();
-      return console.log('test');
+      return compiler.proceed(this.files);
     });
   };
 

@@ -1,16 +1,12 @@
 #= require ./helpers
 class root.Compiler
-  initialize: (options) ->
-    console.log 'tt'
+  constructor: (grunt) ->
     @snockets = new (require("snockets"))()
-    @helper   = new root.Helper(options)
+    @helper   = new root.Helper(@grunt)
     @path     = require("path")
-    @grunt    = options.grunt
-    @files    = options.files
+    @grunt    = grunt
 
-  proceed: ->
-    console.log 'files'
-
+  proceed: (files) ->
     @helper.isAvaliable files.length
     for file in files
       this.prepareList file
@@ -18,7 +14,7 @@ class root.Compiler
   prepareList: (files) ->
     @helper.isAvaliable files.dest
     for file in files.src
-      this.compile file, @files.dest
+      this.compile file, files.dest
 
   compile: (file, dest) ->
     js = @snockets.getConcatenation(

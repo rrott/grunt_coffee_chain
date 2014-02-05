@@ -11,6 +11,13 @@ then
     rm Gruntfile.js-e
 fi
 
+#coffescript is compiling on mac in different way for an unknown reason. will investigate
+if  [[ "$OSTYPE" == "darwin"* ]]; then
+  cp test/integration/expected/mac/* test/integration/expected/
+else
+  cp test/integration/expected/linux/* test/integration/expected/
+fi
+
 #compile test cases using new version of coffee-chain
-grunt --gruntfile Gruntfile.js test 
+grunt --gruntfile Gruntfile.js test
 
