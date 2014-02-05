@@ -1,5 +1,5 @@
 (function() {
-  "use strict";
+  'use strict';
   module.exports = function(grunt) {
     grunt.initConfig({
       clean: {
@@ -19,7 +19,7 @@
           dest: 'test/integration/compiled/coffee_chain_test.js',
           src: 'test/integration/src/coffee_chain_test.coffee'
         },
-        grunt: {
+        gruntfile: {
           dest: 'Gruntfile.js',
           src: 'Gruntfile.coffee'
         }
@@ -28,12 +28,13 @@
         tests: ['test/integration/compiled/*_test.js']
       }
     });
-    grunt.loadTasks("tasks");
-    grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-contrib-nodeunit");
-    grunt.loadNpmTasks('grunt-coffee-chain');
-    grunt.registerTask("test", ["clean", "coffeeChain", "nodeunit"]);
-    return grunt.registerTask("default", ["test"]);
+    grunt.loadTasks('tasks');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-nodeunit');
+    
+    grunt.registerTask('compile', ['clean:scripts', 'coffeeChain:compile', 'coffeeChain:gruntfile']);
+    grunt.registerTask('test', ['clean:tests', 'coffeeChain:test', 'coffeeChain:default_options', 'nodeunit']);
+    return grunt.registerTask('default', ['compile']);
   };
 
 }).call(this);

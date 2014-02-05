@@ -5,7 +5,7 @@
 # * Copyright (c) 2014 Roman Rott (rrott)
 # * Licensed under the MIT license.
 #
-"use strict"
+'use strict'
 module.exports = (grunt) ->
 
   grunt.initConfig
@@ -22,24 +22,25 @@ module.exports = (grunt) ->
         src: 'test/fixtures/default_options.coffee'
         dest: 'tmp/default_options.js'
       #custom_options:
-      #  src: "test/fixtures/default_options.coffee"
-      #  dest: "tmp/custom_options.js"
+      #  src: 'test/fixtures/default_options.coffee'
+      #  dest: 'tmp/custom_options.js'
       test:
         dest: 'test/integration/compiled/coffee_chain_test.js'
         src:  'test/integration/src/coffee_chain_test.coffee'
-      grunt:
+      gruntfile:
         dest: 'Gruntfile.js'
         src:  'Gruntfile.coffee'
 
     nodeunit:
       tests: ['test/integration/compiled/*_test.js']
 
-  grunt.loadTasks "tasks"
+  grunt.loadTasks 'tasks'
 
-  grunt.loadNpmTasks "grunt-contrib-clean"
-  grunt.loadNpmTasks "grunt-contrib-nodeunit"
+  grunt.loadNpmTasks 'grunt-contrib-clean'
+  grunt.loadNpmTasks 'grunt-contrib-nodeunit'
   grunt.loadNpmTasks 'grunt-coffee-chain'
 
-  grunt.registerTask "test", ["clean", "coffeeChain", "nodeunit"]
+  grunt.registerTask 'compile', ['clean:scripts', 'coffeeChain:compile', 'coffeeChain:gruntfile']
+  grunt.registerTask 'test',    ['clean:tests', 'coffeeChain:test', 'coffeeChain:default_options', 'nodeunit']
 
-  grunt.registerTask "default", ["test"]
+  grunt.registerTask 'default', ['compile']
