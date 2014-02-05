@@ -10,7 +10,7 @@ exports.coffeeChain =
   default_options: (test) ->
     test.expect 1
     actual = grunt.file.read("tmp/default_options.js")
-    expected = grunt.file.read("test/integration/expected/default_options.js")
+    expected = grunt.file.read("test/expected/default_options.js")
     test.equal actual, expected, "should concatinate and compile files"
     test.done()
 

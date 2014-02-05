@@ -7,12 +7,10 @@
 #
 'use strict'
 module.exports = (grunt) ->
-
   grunt.initConfig
     clean:
       tests:   ['tmp']
       scripts: ['tasks/', 'Gruntfile.js']
-
 
     coffeeChain:
       compile:
@@ -24,15 +22,16 @@ module.exports = (grunt) ->
       #custom_options:
       #  src: 'test/fixtures/default_options.coffee'
       #  dest: 'tmp/custom_options.js'
-      test:
-        dest: 'test/integration/compiled/coffee_chain_test.js'
-        src:  'test/integration/src/coffee_chain_test.coffee'
+      tests:
+        dest: 'test/compiled/coffee_chain.spec.js'
+        src:  'test/src/coffee_chain.spec.coffee'
       gruntfile:
         dest: 'Gruntfile.js'
         src:  'Gruntfile.coffee'
 
     nodeunit:
-      tests: ['test/integration/compiled/*_test.js']
+      tests: ['test/compiled/coffee_chain.spec.js']
+
 
   grunt.loadTasks 'tasks'
 
@@ -40,8 +39,8 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-nodeunit'
   grunt.loadNpmTasks 'grunt-coffee-chain'
 
-  grunt.registerTask 'compile',   ['clean:scripts', 'coffeeChain:compile', 'coffeeChain:gruntfile' , 'cleanTest']
-  grunt.registerTask 'cleanTest', ['clean:tests', 'coffeeChain:test']
+  grunt.registerTask 'compile',   [ 'clean:scripts', 'coffeeChain:compile',   'coffeeChain:gruntfile', 'cleanTest']
+  grunt.registerTask 'cleanTest', [ 'clean:tests',  'coffeeChain:tests']
   grunt.registerTask 'test',      [ 'coffeeChain:default_options', 'nodeunit']
 
   grunt.registerTask 'default', ['compile']

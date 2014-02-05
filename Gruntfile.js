@@ -15,9 +15,9 @@
           src: 'test/fixtures/default_options.coffee',
           dest: 'tmp/default_options.js'
         },
-        test: {
-          dest: 'test/integration/compiled/coffee_chain_test.js',
-          src: 'test/integration/src/coffee_chain_test.coffee'
+        tests: {
+          dest: 'test/compiled/coffee_chain.spec.js',
+          src: 'test/src/coffee_chain.spec.coffee'
         },
         gruntfile: {
           dest: 'Gruntfile.js',
@@ -25,7 +25,7 @@
         }
       },
       nodeunit: {
-        tests: ['test/integration/compiled/*_test.js']
+        tests: ['test/compiled/coffee_chain.spec.js']
       }
     });
     grunt.loadTasks('tasks');
@@ -33,7 +33,7 @@
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     
     grunt.registerTask('compile', ['clean:scripts', 'coffeeChain:compile', 'coffeeChain:gruntfile', 'cleanTest']);
-    grunt.registerTask('cleanTest', ['clean:tests', 'coffeeChain:test']);
+    grunt.registerTask('cleanTest', ['clean:tests', 'coffeeChain:tests']);
     grunt.registerTask('test', ['coffeeChain:default_options', 'nodeunit']);
     return grunt.registerTask('default', ['compile']);
   };
