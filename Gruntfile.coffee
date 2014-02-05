@@ -40,7 +40,7 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-nodeunit'
   grunt.loadNpmTasks 'grunt-coffee-chain'
 
-  grunt.registerTask 'compile', ['clean:scripts', 'coffeeChain:compile', 'coffeeChain:gruntfile']
-  grunt.registerTask 'test',    ['clean:tests', 'coffeeChain:test', 'coffeeChain:default_options', 'nodeunit']
+  grunt.registerTask 'compile', ['clean:scripts', 'coffeeChain:compile', 'coffeeChain:test', 'coffeeChain:gruntfile']
+  grunt.registerTask 'test',    ['clean:tests', 'coffeeChain:default_options', 'nodeunit']
 
   grunt.registerTask 'default', ['compile']

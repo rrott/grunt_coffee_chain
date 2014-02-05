@@ -32,8 +32,8 @@
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     
-    grunt.registerTask('compile', ['clean:scripts', 'coffeeChain:compile', 'coffeeChain:gruntfile']);
-    grunt.registerTask('test', ['clean:tests', 'coffeeChain:test', 'coffeeChain:default_options', 'nodeunit']);
+    grunt.registerTask('compile', ['clean:scripts', 'coffeeChain:compile', 'coffeeChain:test', 'coffeeChain:gruntfile']);
+    grunt.registerTask('test', ['clean:tests', 'coffeeChain:default_options', 'nodeunit']);
     return grunt.registerTask('default', ['compile']);
   };
 

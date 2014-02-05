@@ -2,6 +2,7 @@
 grunt --gruntfile Gruntfile.coffee compile
 sed -i -e "s/grunt.loadNpmTasks('grunt-coffee-chain');//g" Gruntfile.js
 
+#hack for mac
 if [ -f Gruntfile.js-e ]
 then
     rm Gruntfile.js-e
