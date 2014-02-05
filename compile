@@ -1,5 +1,8 @@
 #! /bin/bash
-grunt --gruntfile Gruntfile.coffee compile
+#compile new version of coffee-chain using previously published version
+grunt --gruntfile Gruntfile.coffee compile  --force
+
+#remove tasks loader for previous version of coffee-chain
 sed -i -e "s/grunt.loadNpmTasks('grunt-coffee-chain');//g" Gruntfile.js
 
 #hack for mac
@@ -8,4 +11,6 @@ then
     rm Gruntfile.js-e
 fi
 
+#compile test cases using new version of coffee-chain
 grunt --gruntfile Gruntfile.js test
+
