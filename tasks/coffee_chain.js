@@ -1,7 +1,26 @@
 (function() {
+  root.Messages = (function() {
+    function Messages() {
+      this.messages = {
+        missed_param: 'You should provide "src" and "dest" params in the Gruntfile'
+      };
+    }
+
+    Messages.prototype.text = function(text) {
+      return this.messages[text];
+    };
+
+    return Messages;
+
+  })();
+
+}).call(this);
+
+(function() {
   root.Helper = (function() {
     function Helper(grunt) {
       this.grunt = grunt;
+      this.messages = new root.Messages();
     }
 
     Helper.prototype.isAvaliable = function(avaliable) {
@@ -16,7 +35,7 @@
     };
 
     Helper.prototype.showError = function() {
-      return this.grunt.warn('You should provide "src" and "dest" params in the Gruntfile');
+      return this.grunt.warn(this.messages.text('missed_param'));
     };
 
     Helper.prototype._checkFile = function(files) {
@@ -36,10 +55,9 @@
 (function() {
   root.Compiler = (function() {
     function Compiler(grunt) {
-      this.snockets = new (require("snockets"))();
-      this.helper = new root.Helper(grunt);
-      this.path = require("path");
       this.grunt = grunt;
+      this.snockets = new (require("snockets"))();
+      this.helper = new root.Helper(this.grunt);
     }
 
     Compiler.prototype.proceed = function(files) {
@@ -69,7 +87,7 @@
       js = this.snockets.getConcatenation(file, {
         async: false
       });
-      return this.grunt.file.write(this.path.resolve(dest), js);
+      return this.grunt.file.write(dest, js);
     };
 
     return Compiler;

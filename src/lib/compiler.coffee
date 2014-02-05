@@ -1,10 +1,9 @@
 #= require ./helper
 class root.Compiler
   constructor: (grunt) ->
-    @snockets = new (require("snockets"))()
-    @helper   = new root.Helper(grunt)
-    @path     = require("path")
     @grunt    = grunt
+    @snockets = new (require("snockets"))()
+    @helper   = new root.Helper(@grunt)
 
   proceed: (files) ->
     for file in files
@@ -21,8 +20,5 @@ class root.Compiler
       async: false
     )
 
-    @grunt.file.write(
-      @path.resolve(dest)
-      js
-    )
+    @grunt.file.write dest, js
 
