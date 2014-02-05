@@ -5,12 +5,12 @@ grunt --gruntfile Gruntfile.coffee compile
 #remove tasks loader for previous version of coffee-chain
 sed -i -e "s/grunt.loadNpmTasks('grunt-coffee-chain');//g" Gruntfile.js
 
-#hack for mac
+###Hacks for mac
+#it creates backup files on mac for an unknown reason. will investagate
 if [ -f Gruntfile.js-e ]
 then
     rm Gruntfile.js-e
 fi
-
 #coffescript is compiling on mac in different way for an unknown reason. will investigate
 if  [[ "$OSTYPE" == "darwin"* ]]; then
   cp test/integration/expected/mac/* test/integration/expected/
