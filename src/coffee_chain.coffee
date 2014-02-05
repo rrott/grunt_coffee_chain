@@ -5,11 +5,11 @@ module.exports = (grunt) ->
   compiler = new root.Compiler()
   grunt.registerMultiTask "coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", ->
     options =  @options(
-      grunt: grunt
-      files: @files
+      grunt:   grunt
+      files:   @files
     )
-
-    compiler.proceed(options)
+    compiler.initialize(options)
+    compiler.proceed()
 
 
 

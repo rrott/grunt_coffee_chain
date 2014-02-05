@@ -6,7 +6,7 @@
 
     Helpers.prototype.validateFiles = function(filepath) {
       var file_exists;
-      file_exists = this.grunt.file.exists(filepath);
+      file_exists = grunt.file.exists(filepath);
       if (!file_exists) {
         this.grunt.log.warn("Source file \"" + filepath + "\" not found.");
       }
@@ -32,25 +32,24 @@
 
 (function() {
   root.Compiler = (function() {
-    function Compiler() {
-      this.snockets = new (require("snockets"))();
-      this.path = require("path");
-    }
+    function Compiler() {}
 
     Compiler.prototype.initialize = function(options) {
+      console.log('tt');
+      this.snockets = new (require("snockets"))();
+      this.helper = new root.Helper(options);
+      this.path = require("path");
       this.grunt = options.grunt;
-      this.files = options.files;
-      return this.helper = new root.Helper(options);
+      return this.files = options.files;
     };
 
-    Compiler.prototype.proceed = function(options) {
-      var file, _i, _len, _ref, _results;
-      this.initialize(options);
-      this.helper.isAvaliable(this.files.length);
-      _ref = this.files;
+    Compiler.prototype.proceed = function() {
+      var file, _i, _len, _results;
+      console.log('files');
+      this.helper.isAvaliable(files.length);
       _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        file = _ref[_i];
+      for (_i = 0, _len = files.length; _i < _len; _i++) {
+        file = files[_i];
         _results.push(this.prepareList(file));
       }
       return _results;
@@ -58,7 +57,7 @@
 
     Compiler.prototype.prepareList = function(files) {
       var file, _i, _len, _ref, _results;
-      this.helper.isAvaliable(this.files.dest);
+      this.helper.isAvaliable(files.dest);
       _ref = files.src;
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
@@ -93,7 +92,9 @@
         grunt: grunt,
         files: this.files
       });
-      return compiler.proceed(options);
+      compiler.initialize(options);
+      compiler.proceed();
+      return console.log('test');
     });
   };
 
