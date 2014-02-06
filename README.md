@@ -1,8 +1,17 @@
 # grunt-coffee-chain
 
-> grunt's plugin to concat coffeescripts using include derective"
+> grunt plugin inspired by Sprockets to compile CoffeeScripts that has sprockets-style comments to indicate dependencies.
 
-## Getting Started
+## Usage (script-side)
+In your CoffeeScript files, write Sprockets-style comments to indicate dependencies, e.g.
+
+    #= require dependency
+
+If you want to bring in a whole folder of scripts, use
+
+    #= require_tree dir
+
+## Usage (grunt-side)
 This plugin requires Grunt `~0.4.1`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
@@ -17,17 +26,14 @@ Once the plugin has been installed, it may be enabled inside your Gruntfile with
 grunt.loadNpmTasks('grunt-coffee-chain');
 ```
 
-## The "coffee_chain" task
+## The "coffeeChain" task
 
 ### Overview
-In your project's Gruntfile, add a section named `coffee_chain` to the data object passed into `grunt.initConfig()`.
+In your project's Gruntfile, add a section named `coffeeChain` to the data object passed into `grunt.initConfig()`.
 
 ```js
 grunt.initConfig({
   coffeeChain: {
-    options: {
-      // Task-specific options go here.
-    },
     your_target: {
       // Target-specific file lists and/or options go here.
     },
@@ -36,12 +42,18 @@ grunt.initConfig({
 ```
 
 ### Options
-_(not yet implemented)_
+
+#### options.clean
+_(Not yet implemented)_
+Type: `Booleann`
+Default value: `false`
+
+A boolean value that is used to clean resulting CoffeeScript from useless code that coffee compiler adds.
 
 ### Usage Examples
 
 #### Default Options
-In this example, the default options are used to do something with whatever. So if the `testing` file has the content `Testing` and the `123` file had the content `1 2 3`, the generated result would be `Testing, 1 2 3.`
+In these examples, the default options are used to compile coffee scripts to js without cleaning them`
 
 ```js
 grunt.initConfig({
@@ -55,12 +67,68 @@ grunt.initConfig({
 })
 ```
 
+```js
+grunt.initConfig({
+  coffeeChain: {
+    your_target: {
+      src:  'app/assets/javascripts/main.coffee',
+      dest: 'public/assets/app.js'
+    }
+  },
+})
+```
+
+#### Custom Options
+In this example, the custom options are used to compile coffee scripts to js cleaning them`
+
+```js
+grunt.initConfig({
+  coffeeChain: {
+    your_target: {
+      options: {
+        clean: true
+      },
+      src:  'app/assets/javascripts/main.coffee',
+      dest: 'public/assets/app.js'
+    }
+  },
+})
+```
+
+#### CoffeeScript Examples
+In this example, the custom options are used to compile coffee scripts to js minifying and cleaning them`
+
+```coffee
+grunt.initConfig
+  coffeeChain:
+    dist:
+      options:
+        clean: true
+      src: "app/main.coffee"
+      dest: "dist/index.js"
+```
+
 ## Contributing
-I am using coffeescript for this, so pull requests to js files will not be accepted. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+This application is written in CoffeeScript with sprockets-style comments to indicate dependencies and so
+
+### it compiles itself to js using itself.
+
+Due to above, please chnage coffeescripts instead of js files in order to send a pull request.
 
 ## Release History
 version 0.0.1 - first release published to npm.
 
+version 0.1.0 - added custom minify option
+
+version 0.1.1 - refactored version that compiles itself to itself
+
+version 0.1.2 - 1.2.0 - some of them are incorrect and may broke the functionality. Use any higher version
+
+version 1.2.0 - removed custom minify option. Use apropriate node modules instead
+
+version 1.2.1 - was compilled by plugin that were compiled in common node.js way
+
+version 1.2.2 - correctly compiled version of grunt-coffee-chain that compiles itself to itself
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rrott/grunt_coffee_chain/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
