@@ -111,7 +111,7 @@ grunt.initConfig
 ## Contributing
 This application is written in CoffeeScript with sprockets-style comments to indicate dependencies and so
 
-### it compiles itself to js using itself.
+### it compiles itself to js using previous version of itself.
 
 Due to above, please chnage coffeescripts instead of js files in order to send a pull request.
 
