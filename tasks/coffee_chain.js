@@ -58,47 +58,52 @@
 
   root.Compiler = (function() {
     function Compiler(grunt) {
-      this.prepareList = __bind(this.prepareList, this);
+      this.proceed = __bind(this.proceed, this);
       this.grunt = grunt;
       this.snockets = new (require("snockets"))();
       this.helper = new root.Helper(this.grunt);
-      this.temp = require('temp');
-      this.fs = require('fs');
+      this.temp = require('tmp');
     }
 
-    Compiler.prototype.proceed = function(files) {
-      var file, _i, _len, _results;
+    Compiler.prototype.proceed = function(options) {
+      var _this = this;
+      return this.temp.tmpName({
+        mode: 644,
+        prefix: 'coffee-chain-',
+        postfix: '.txt'
+      }, function(err, path, fd) {
+        var files, _i, _len, _results;
+        if (err) {
+          throw err;
+        }
+        _results = [];
+        for (_i = 0, _len = options.length; _i < _len; _i++) {
+          files = options[_i];
+          _this.helper.checkFiles(files);
+          _this.prepareList(files, path);
+          _results.push(_this.grunt.file.copy(path, files.dest));
+        }
+        return _results;
+      });
+    };
+
+    Compiler.prototype.prepareList = function(files, tmp) {
+      var file, _i, _len, _ref, _results;
+      _ref = files.src;
       _results = [];
-      for (_i = 0, _len = files.length; _i < _len; _i++) {
-        file = files[_i];
-        this.helper.checkFiles(file);
-        _results.push(this.prepareList(file));
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        file = _ref[_i];
+        _results.push(this.compile(file, tmp));
       }
       return _results;
     };
 
-    Compiler.prototype.prepareList = function(files) {
-      var _this = this;
-      return this.temp.open("coffee_chain", function(err, tmp) {
-        var file, _i, _len, _ref;
-        if (!err) {
-          _ref = files.src;
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            file = _ref[_i];
-            _this.compile(file, tmp.path);
-          }
-          console.log(tmp.path);
-          return _this.fs.renameSync(tmp.path, files.dest);
-        }
-      });
-    };
-
-    Compiler.prototype.compile = function(file, dest) {
+    Compiler.prototype.compile = function(file, tmp) {
       var js;
       js = this.snockets.getConcatenation(file, {
         async: false
       });
-      return this.grunt.file.write(dest, js);
+      return this.grunt.file.write(tmp, js);
     };
 
     return Compiler;
