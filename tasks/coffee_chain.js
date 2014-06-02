@@ -54,11 +54,16 @@
 }).call(this);
 
 (function() {
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
   root.Compiler = (function() {
     function Compiler(grunt) {
+      this.prepareList = __bind(this.prepareList, this);
       this.grunt = grunt;
       this.snockets = new (require("snockets"))();
       this.helper = new root.Helper(this.grunt);
+      this.temp = require('temp');
+      this.fs = require('fs');
     }
 
     Compiler.prototype.proceed = function(files) {
@@ -73,14 +78,20 @@
     };
 
     Compiler.prototype.prepareList = function(files) {
-      var file, _i, _len, _ref, _results;
-      _ref = files.src;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        file = _ref[_i];
-        _results.push(this.compile(file, files.dest));
-      }
-      return _results;
+      return this.temp.open("coffee_chain", (function(_this) {
+        return function(err, tmp) {
+          var file, _i, _len, _ref;
+          if (!err) {
+            _ref = files.src;
+            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+              file = _ref[_i];
+              _this.compile(file, tmp.path);
+            }
+            console.log(tmp.path);
+            return _this.fs.renameSync(tmp.path, files.dest);
+          }
+        };
+      })(this));
     };
 
     Compiler.prototype.compile = function(file, dest) {
