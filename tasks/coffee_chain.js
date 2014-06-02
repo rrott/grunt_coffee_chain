@@ -54,11 +54,8 @@
 }).call(this);
 
 (function() {
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
-
   root.Compiler = (function() {
     function Compiler(grunt) {
-      this.proceed = __bind(this.proceed, this);
       this.grunt = grunt;
       this.snockets = new (require("snockets"))();
       this.helper = new root.Helper(this.grunt);
@@ -69,25 +66,28 @@
       var _this = this;
       return this.temp.tmpName({
         mode: 644,
-        prefix: 'coffee-chain-',
-        postfix: '.txt'
-      }, function(err, path, fd) {
-        var files, _i, _len, _results;
+        prefix: 'coffee-chain-'
+      }, function(err, tmp) {
         if (err) {
           throw err;
         }
-        _results = [];
-        for (_i = 0, _len = options.length; _i < _len; _i++) {
-          files = options[_i];
-          _this.helper.checkFiles(files);
-          _this.prepareList(files, path);
-          _results.push(_this.grunt.file.copy(path, files.dest));
-        }
-        return _results;
+        return _this.initCompilation(options, tmp);
       });
     };
 
-    Compiler.prototype.prepareList = function(files, tmp) {
+    Compiler.prototype.initCompilation = function(options, tmp) {
+      var files, _i, _len, _results;
+      _results = [];
+      for (_i = 0, _len = options.length; _i < _len; _i++) {
+        files = options[_i];
+        this.helper.checkFiles(files);
+        this.compileAll(files, tmp);
+        _results.push(this.grunt.file.copy(tmp, files.dest));
+      }
+      return _results;
+    };
+
+    Compiler.prototype.compileAll = function(files, tmp) {
       var file, _i, _len, _ref, _results;
       _ref = files.src;
       _results = [];
