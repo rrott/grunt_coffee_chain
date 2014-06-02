@@ -78,20 +78,19 @@
     };
 
     Compiler.prototype.prepareList = function(files) {
-      return this.temp.open("coffee_chain", (function(_this) {
-        return function(err, tmp) {
-          var file, _i, _len, _ref;
-          if (!err) {
-            _ref = files.src;
-            for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-              file = _ref[_i];
-              _this.compile(file, tmp.path);
-            }
-            console.log(tmp.path);
-            return _this.fs.renameSync(tmp.path, files.dest);
+      var _this = this;
+      return this.temp.open("coffee_chain", function(err, tmp) {
+        var file, _i, _len, _ref;
+        if (!err) {
+          _ref = files.src;
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            file = _ref[_i];
+            _this.compile(file, tmp.path);
           }
-        };
-      })(this));
+          console.log(tmp.path);
+          return _this.fs.renameSync(tmp.path, files.dest);
+        }
+      });
     };
 
     Compiler.prototype.compile = function(file, dest) {
