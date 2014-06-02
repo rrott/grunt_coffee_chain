@@ -17,4 +17,4 @@ class root.Helper
     @grunt.warn @messages.text('missed_param')
 
   _checkFile: (files) ->
-    if files?  then  this.isAvaliable files.length  else this.showError()
+    if files?  then  this.isAvaliable(files.length)  else this.showError()

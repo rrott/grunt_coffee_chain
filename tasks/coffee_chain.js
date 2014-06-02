@@ -65,40 +65,41 @@
     Compiler.prototype.proceed = function(options) {
       var _this = this;
       return this.temp.tmpName({
-        mode: 644,
         prefix: 'coffee-chain-'
       }, function(err, tmp) {
         if (err) {
           throw err;
         }
-        return _this.initCompilation(options, tmp);
+        return _this._initCompilation(options, tmp);
       });
     };
 
-    Compiler.prototype.initCompilation = function(options, tmp) {
-      var files, _i, _len, _results;
-      _results = [];
+    Compiler.prototype._initCompilation = function(options, tmp) {
+      var files, _i, _len;
       for (_i = 0, _len = options.length; _i < _len; _i++) {
         files = options[_i];
         this.helper.checkFiles(files);
-        this.compileAll(files, tmp);
-        _results.push(this.grunt.file.copy(tmp, files.dest));
+        this._compileAll(files, tmp);
       }
-      return _results;
+      return this._saveDestination(tmp, files.dest);
     };
 
-    Compiler.prototype.compileAll = function(files, tmp) {
+    Compiler.prototype._saveDestination = function(tmp, dest) {
+      return this.grunt.file.copy(tmp, dest);
+    };
+
+    Compiler.prototype._compileAll = function(files, tmp) {
       var file, _i, _len, _ref, _results;
       _ref = files.src;
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         file = _ref[_i];
-        _results.push(this.compile(file, tmp));
+        _results.push(this._compile(file, tmp));
       }
       return _results;
     };
 
-    Compiler.prototype.compile = function(file, tmp) {
+    Compiler.prototype._compile = function(file, tmp) {
       var js;
       js = this.snockets.getConcatenation(file, {
         async: false

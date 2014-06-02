@@ -8,24 +8,26 @@ class root.Compiler
 
   proceed: (options) ->
     @temp.tmpName(
-      mode: 644
       prefix: 'coffee-chain-'
       , (err, tmp) =>
         throw err if err
-        this.initCompilation(options, tmp)
+        this._initCompilation(options, tmp)
     )
 
-  initCompilation: (options, tmp) ->
+  _initCompilation: (options, tmp) ->
     for files in options
       @helper.checkFiles files
-      this.compileAll files, tmp
-      @grunt.file.copy(tmp, files.dest)
+      this._compileAll files, tmp
+    this._saveDestination(tmp, files.dest)
 
-  compileAll: (files, tmp) ->
+  _saveDestination: (tmp, dest) ->
+    @grunt.file.copy(tmp, dest)
+
+  _compileAll: (files, tmp) ->
     for file in files.src
-      this.compile file, tmp
+      this._compile file, tmp
 
-  compile: (file, tmp) ->
+  _compile: (file, tmp) ->
     js = @snockets.getConcatenation file, {async: false}
     @grunt.file.write  tmp, js
 
