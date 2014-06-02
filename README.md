@@ -111,6 +111,11 @@ grunt.initConfig
 ## Contributing
 This application is written in CoffeeScript with sprockets-style comments to indicate dependencies and so
 
+When you change something in this app it is better to compile tests using previous version of this app as we use coffee_chain to compile coffee_chain to itself and need to protect us from testing application using incorrectly compiled tests. So to run tests I have added a simple script that should be used instead of 'npm test' command:
+```
+  ./compile
+```
+
 ### it compiles itself to javascript using previous version of itself.
 
 Due to above, please chnage coffeescripts instead of js files in order to send a pull request.

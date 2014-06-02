@@ -2,7 +2,7 @@
 class root.Compiler
   constructor: (grunt) ->
     @grunt    = grunt
-    @snockets = new (require("snockets"))()
+    @snockets = new (require "snockets" )()
     @helper   = new root.Helper(@grunt)
 
   proceed: (files) ->
