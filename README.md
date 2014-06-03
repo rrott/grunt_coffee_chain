@@ -111,29 +111,19 @@ grunt.initConfig
 ## Contributing
 This application is written in CoffeeScript with sprockets-style comments to indicate dependencies and so
 
+### it compiles itself to javascript using previous version of itself.
 When you change something in this app it is better to compile tests using previous version of this app as we use coffee_chain to compile coffee_chain to itself and need to protect us from testing application using incorrectly compiled tests. So to run tests I have added a simple script that should be used instead of 'npm test' command:
 ```
   ./compile
 ```
 
-### it compiles itself to javascript using previous version of itself.
-
-Due to above, please chnage coffeescripts instead of js files in order to send a pull request.
-
 ## Release History
-version 0.0.1 - first release published to npm.
-
-version 0.1.0 - added custom minify option
-
-version 0.1.1 - refactored version that compiles itself to itself
-
 version 0.1.2 - 1.2.0 - some of them are incorrect and may broke the functionality. Use any higher version
+...
+version 1.2.1 - refactored from scratch. It was compilled in common node.js way
+version 1.2.2 - the same as previous version but compiled from coffee to js using 1.2.1
+version 1.2.3 - is broken. do not use it!
 
-version 1.2.0 - removed custom minify option. Use apropriate node modules instead
+version 1.2.4 - Current. Updated coffeeChain to save all data to a temp file and only when everything is complete overwrite the destination file
 
-version 1.2.1 - was compilled by plugin that were compiled in common node.js way
-
-version 1.2.2 - correctly compiled version of grunt-coffee-chain that compiles itself to itself
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/rrott/grunt_coffee_chain/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 

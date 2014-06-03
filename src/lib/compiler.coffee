@@ -14,13 +14,13 @@ class root.Compiler
         @helper.checkFiles files
         this._compileAll files, tmp.path
 
-  _saveDestination: (tmp, dest) ->
+  _saveDestination: (dest, tmp) ->
     @grunt.file.copy(tmp, dest)
 
   _compileAll: (files, tmp) ->
     for file in files.src
       this._compile file, tmp
-    this._saveDestination(tmp, files.dest)
+    this._saveDestination(files.dest, tmp)
 
   _compile: (file, tmp) ->
     js = @snockets.getConcatenation file, {async: false}
