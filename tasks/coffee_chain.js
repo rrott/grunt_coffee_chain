@@ -59,29 +59,27 @@
       this.grunt = grunt;
       this.snockets = new (require("snockets"))();
       this.helper = new root.Helper(this.grunt);
-      this.temp = require('tmp');
+      this.temp = require('temp').track();
     }
 
     Compiler.prototype.proceed = function(options) {
-      var _this = this;
-      return this.temp.tmpName({
-        prefix: 'coffee-chain-'
-      }, function(err, tmp) {
-        if (err) {
-          throw err;
-        }
-        return _this._initCompilation(options, tmp);
-      });
-    };
-
-    Compiler.prototype._initCompilation = function(options, tmp) {
-      var files, _i, _len;
-      for (_i = 0, _len = options.length; _i < _len; _i++) {
-        files = options[_i];
-        this.helper.checkFiles(files);
-        this._compileAll(files, tmp);
-      }
-      return this._saveDestination(tmp, files.dest);
+      this.options = options;
+      return this.temp.open("coffee-chain-", (function(_this) {
+        return function(err, tmp) {
+          var files, _i, _len, _ref, _results;
+          if (err) {
+            throw err;
+          }
+          _ref = _this.options;
+          _results = [];
+          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+            files = _ref[_i];
+            _this.helper.checkFiles(files);
+            _results.push(_this._compileAll(files, tmp.path));
+          }
+          return _results;
+        };
+      })(this));
     };
 
     Compiler.prototype._saveDestination = function(tmp, dest) {
@@ -89,14 +87,13 @@
     };
 
     Compiler.prototype._compileAll = function(files, tmp) {
-      var file, _i, _len, _ref, _results;
+      var file, _i, _len, _ref;
       _ref = files.src;
-      _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         file = _ref[_i];
-        _results.push(this._compile(file, tmp));
+        this._compile(file, tmp);
       }
-      return _results;
+      return this._saveDestination(tmp, files.dest);
     };
 
     Compiler.prototype._compile = function(file, tmp) {

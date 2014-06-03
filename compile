@@ -11,6 +11,7 @@ if [ -f Gruntfile.js-e ]
 then
     rm Gruntfile.js-e
 fi
+
 #coffescript is compiling on mac in different way for an unknown reason. will investigate
 if  [[ "$OSTYPE" == "darwin"* ]]; then
   cp test/expected/mac/* test/expected/

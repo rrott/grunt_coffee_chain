@@ -4,21 +4,15 @@ class root.Compiler
     @grunt    = grunt
     @snockets = new (require "snockets" )()
     @helper   = new root.Helper(@grunt)
-    @temp     = require('tmp')
+    @temp     = require('temp').track()
 
   proceed: (options) ->
-    @temp.tmpName(
-      prefix: 'coffee-chain-'
-      , (err, tmp) =>
-        throw err if err
-        this._initCompilation(options, tmp)
-    )
-
-  _initCompilation: (options, tmp) ->
-    for files in options
-      @helper.checkFiles files
-      this._compileAll files, tmp
-    this._saveDestination(tmp, files.dest)
+    @options = options
+    @temp.open "coffee-chain-", (err, tmp) =>
+      throw err if err
+      for files in @options
+        @helper.checkFiles files
+        this._compileAll files, tmp.path
 
   _saveDestination: (tmp, dest) ->
     @grunt.file.copy(tmp, dest)
@@ -26,6 +20,7 @@ class root.Compiler
   _compileAll: (files, tmp) ->
     for file in files.src
       this._compile file, tmp
+    this._saveDestination(tmp, files.dest)
 
   _compile: (file, tmp) ->
     js = @snockets.getConcatenation file, {async: false}
