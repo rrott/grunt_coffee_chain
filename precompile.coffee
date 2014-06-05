@@ -6,16 +6,16 @@ module.exports = (grunt) ->
   grunt.initConfig
     clean:
       tests:   ['test/compiled/']
-      tasks:   ['tasks/']
+      tasks:   ['dist/']
     coffeeChain:
       tests:
         src:  'test/src/coffee_chain.spec.coffee'
         dest: 'test/compiled/coffee_chain.spec.js'
       tasks:
         src:  'src/coffee_chain.coffee',
-        dest: 'tasks/coffee_chain.js'
+        dest: 'dist/coffee_chain.js'
 
   grunt.loadNpmTasks 'grunt-contrib-clean'
-  grunt.loadNpmTasks 'grunt-coffee-chain'
+  grunt.loadTasks('tasks');
 
   grunt.registerTask 'default', ['clean', 'coffeeChain']
