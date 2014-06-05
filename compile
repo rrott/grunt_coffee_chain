@@ -1,16 +1,10 @@
 #! /bin/bash
 #compile new version of coffee-chain using previously published version
-grunt --gruntfile Gruntfile.coffee compile
+echo -e "\n>>> Compiling tests using previous version of coffee-chain\n"
+grunt --gruntfile precompile.coffee default
 
 #remove tasks loader for previous version of coffee-chain
-sed -i -e "s/grunt.loadNpmTasks('grunt-coffee-chain');//g" Gruntfile.js
-
-###Hacks for mac
-#it creates backup files on mac for an unknown reason. will investagate
-if [ -f Gruntfile.js-e ]
-then
-    rm Gruntfile.js-e
-fi
+#sed -i -e "s/grunt.loadNpmTasks('grunt-coffee-chain');/grunt.loadNpmTasks('grunt-coffee-chain');/g" Gruntfile.js
 
 #coffescript is compiling on mac in different way for an unknown reason. will investigate
 if  [[ "$OSTYPE" == "darwin"* ]]; then
@@ -19,6 +13,7 @@ else
   cp test/expected/linux/* test/expected/
 fi
 
+echo -e "\n>>> Compiling coffee-chain\n"
 #compile test cases using new version of coffee-chain
-grunt --gruntfile Gruntfile.js test
+grunt --gruntfile Gruntfile.js
 

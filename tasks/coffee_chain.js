@@ -63,37 +63,41 @@
     }
 
     Compiler.prototype.proceed = function(options) {
+      var files, _i, _len, _ref, _results;
       this.options = options;
-      return this.temp.open("coffee-chain-", (function(_this) {
-        return function(err, tmp) {
-          var files, _i, _len, _ref, _results;
-          if (err) {
-            throw err;
-          }
-          _ref = _this.options;
-          _results = [];
-          for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-            files = _ref[_i];
+      _ref = this.options;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        files = _ref[_i];
+        _results.push(this.temp.open("coffee-chain-", (function(_this) {
+          return function(err, tmp) {
+            if (err) {
+              throw err;
+            }
             _this.helper.checkFiles(files);
-            _results.push(_this._compileAll(files, tmp.path));
-          }
-          return _results;
-        };
-      })(this));
+            return _this._compileAll(files, tmp.path, function() {
+              return _this._saveDestination(files.dest, tmp.path);
+            });
+          };
+        })(this)));
+      }
+      return _results;
     };
 
-    Compiler.prototype._saveDestination = function(tmp, dest) {
-      return this.grunt.file.copy(tmp, dest);
-    };
-
-    Compiler.prototype._compileAll = function(files, tmp) {
+    Compiler.prototype._compileAll = function(files, tmp, callback) {
       var file, _i, _len, _ref;
       _ref = files.src;
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         file = _ref[_i];
         this._compile(file, tmp);
       }
-      return this._saveDestination(tmp, files.dest);
+      if (callback) {
+        return callback();
+      }
+    };
+
+    Compiler.prototype._saveDestination = function(dest, tmp) {
+      return this.grunt.file.copy(tmp, dest);
     };
 
     Compiler.prototype._compile = function(file, tmp) {

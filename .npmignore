@@ -4,6 +4,5 @@ npm-debug.log
 tmp
 src
 node_modules
-Gruntfile.coffee
 compile
 test/src

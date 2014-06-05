@@ -8,19 +8,20 @@ class root.Compiler
 
   proceed: (options) ->
     @options = options
-    @temp.open "coffee-chain-", (err, tmp) =>
-      throw err if err
-      for files in @options
+    for files in @options
+      @temp.open "coffee-chain-", (err, tmp) =>
+        throw err if err
         @helper.checkFiles files
-        this._compileAll files, tmp.path
+        this._compileAll files, tmp.path, =>
+          this._saveDestination(files.dest, tmp.path)
+
+  _compileAll: (files, tmp, callback) ->
+    for file in files.src
+      this._compile file, tmp
+    callback() if callback
 
   _saveDestination: (dest, tmp) ->
     @grunt.file.copy(tmp, dest)
-
-  _compileAll: (files, tmp) ->
-    for file in files.src
-      this._compile file, tmp
-    this._saveDestination(files.dest, tmp)
 
   _compile: (file, tmp) ->
     js = @snockets.getConcatenation file, {async: false}
