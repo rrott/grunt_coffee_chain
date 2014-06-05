@@ -85,15 +85,14 @@
     };
 
     Compiler.prototype._compileAll = function(files, tmp, callback) {
-      var file, _i, _len, _ref;
+      var file, _i, _len, _ref, _results;
       _ref = files.src;
+      _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
         file = _ref[_i];
-        this._compile(file, tmp);
+        _results.push(this._compile(file, tmp));
       }
-      if (callback) {
-        return callback();
-      }
+      return _results;
     };
 
     Compiler.prototype._saveDestination = function(dest, tmp) {

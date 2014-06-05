@@ -1,7 +1,7 @@
 #! /bin/bash
 #compile new version of coffee-chain using previously published version
 echo -e "\n>>> Compiling tests using previous version of coffee-chain\n"
-grunt --gruntfile precompile.coffee default
+grunt --gruntfile precompile.coffee
 
 #remove tasks loader for previous version of coffee-chain
 #sed -i -e "s/grunt.loadNpmTasks('grunt-coffee-chain');/grunt.loadNpmTasks('grunt-coffee-chain');/g" Gruntfile.js
@@ -16,4 +16,4 @@ fi
 echo -e "\n>>> Compiling coffee-chain\n"
 #compile test cases using new version of coffee-chain
 grunt --gruntfile Gruntfile.js
-
+rm test/expected/*.js

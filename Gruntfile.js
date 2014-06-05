@@ -13,12 +13,16 @@ module.exports = function(grunt) {
       tests: ['tmp'],
     },
     coffeeChain: {
+      tasks: {
+        src:  'src/coffee_chain.coffee',
+        dest: 'tmp/coffee_chain.js'
+      },
       default_options: {
-        src: 'test/fixtures/default_options.coffee',
+        src:  'test/fixtures/default_options.coffee',
         dest: 'tmp/default_options.js'
       },
       custom_options: {
-        src: 'test/fixtures/custom_options.coffee',
+        src:  'test/fixtures/custom_options.coffee',
         dest: 'tmp/custom_options.js'
       }
     },
@@ -30,7 +34,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  // By default, lint and run all tests.
-  grunt.registerTask('default', ['clean', 'coffeeChain', 'nodeunit', 'clean']);
+  grunt.registerTask('default', ['clean', 'coffeeChain', 'nodeunit']);
 
 }
