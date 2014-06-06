@@ -121,9 +121,9 @@ When you change something in this app it is better to compile tests using previo
 
 > version 1.2.5 - Current. Updated coffeeChain to save all data to a temp file and only when everything is complete overwrite the destination file
 
-version 1.2.2 - the same as previous version but compiled from coffee to js using coffeeChain 1.2.1
+version 1.2.2 - the same as previous version but rewritten to coffeescript and compiled back to js using the same coffeeChain but using previous version 1.2.1
 
 version 1.2.1 - refactored from scratch. It was compilled in common node.js way
 
-Note: versions 0.1.2 - 1.2.0 and v1.2.3 - 1.2.4 : some of them are incorrect and may be broken. Use any higher version
+Note: some of packages versions prior 1.2.1 may be incorrect or broken. 1.2.3 and 1.2.4 are incorrect as well. Use any higher version or the latest one.
 
