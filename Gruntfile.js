@@ -10,12 +10,16 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     clean: {
-      tests: ['tmp'],
+      tests: ['tmp']
     },
     coffeeChain: {
       tasks: {
         src:  'src/coffee_chain.coffee',
         dest: 'tmp/coffee_chain.js'
+      },
+      tests: {
+        src:  'test/src/coffee_chain.spec.coffee',
+        dest: 'test/compiled/coffee_chain.spec.js'
       },
       default_options: {
         src:  'test/fixtures/default_options.coffee',
@@ -34,6 +38,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-  grunt.registerTask('default', ['clean', 'coffeeChain', 'nodeunit']);
+  grunt.registerTask('default', ['clean', 'coffeeChain', 'nodeunit', 'clean']);
 
 }

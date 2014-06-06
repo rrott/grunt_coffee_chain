@@ -10,20 +10,28 @@ class root.Compiler
     @options = options
     for files in @options
       @temp.open "coffee-chain-", (err, tmp) =>
-        throw err if err
         @helper.checkFiles files
-        this._compileAll files, tmp.path, =>
-          this._saveDestination(files.dest, tmp.path)
+        this._compileAll(
+          files
+          tmp.path
+          =>
+            @grunt.file.copy tmp.path, files.dest
+            @options.done()
+        )
 
   _compileAll: (files, tmp, callback) ->
     for file in files.src
       this._compile file, tmp
     callback() if callback
 
-  _saveDestination: (dest, tmp) ->
-    @grunt.file.copy(tmp, dest)
+  _compile: (file, dest) ->
+    js = @snockets.getConcatenation(
+      file
+      async: false
+    )
 
-  _compile: (file, tmp) ->
-    js = @snockets.getConcatenation file, {async: false}
-    @grunt.file.write  tmp, js
+    @grunt.file.write dest, js
+
+
+
 

@@ -7,13 +7,6 @@ exports.coffeeChain =
     # setup here if necessary
     done()
 
-  tasks: (test) ->
-    test.expect 1
-    actual = grunt.file.read("tmp/coffee_chain.js")
-    expected = grunt.file.read("tasks/coffee_chain.js")
-    test.equal actual, expected, "should result the same script as previous version results"
-    test.done()
-
   default_options: (test) ->
     test.expect 1
     actual = grunt.file.read("tmp/default_options.js")

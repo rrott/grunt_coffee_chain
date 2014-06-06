@@ -59,31 +59,42 @@
       this.grunt = grunt;
       this.snockets = new (require("snockets"))();
       this.helper = new root.Helper(this.grunt);
+      this.temp = require('temp').track();
     }
 
-    Compiler.prototype.proceed = function(files) {
-      var file, _i, _len, _results;
-      _results = [];
-      for (_i = 0, _len = files.length; _i < _len; _i++) {
-        file = files[_i];
-        this.helper.checkFiles(file);
-        _results.push(this.prepareList(file));
-      }
-      return _results;
-    };
-
-    Compiler.prototype.prepareList = function(files) {
-      var file, _i, _len, _ref, _results;
-      _ref = files.src;
+    Compiler.prototype.proceed = function(options) {
+      var files, _i, _len, _ref, _results;
+      this.options = options;
+      _ref = this.options;
       _results = [];
       for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        file = _ref[_i];
-        _results.push(this.compile(file, files.dest));
+        files = _ref[_i];
+        _results.push(this.temp.open("coffee-chain-", (function(_this) {
+          return function(err, tmp) {
+            _this.helper.checkFiles(files);
+            return _this._compileAll(files, tmp.path, function() {
+              _this.grunt.file.copy(tmp.path, files.dest);
+              return _this.options.done();
+            });
+          };
+        })(this)));
       }
       return _results;
     };
 
-    Compiler.prototype.compile = function(file, dest) {
+    Compiler.prototype._compileAll = function(files, tmp, callback) {
+      var file, _i, _len, _ref;
+      _ref = files.src;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        file = _ref[_i];
+        this._compile(file, tmp);
+      }
+      if (callback) {
+        return callback();
+      }
+    };
+
+    Compiler.prototype._compile = function(file, dest) {
       var js;
       js = this.snockets.getConcatenation(file, {
         async: false
@@ -102,6 +113,7 @@
     var compiler;
     compiler = new root.Compiler(grunt);
     return grunt.registerMultiTask("coffeeChain", "grunt's task for concatenating CoffeeScript files that have 'require' directive in correct order", function() {
+      this.files.done = this.async();
       return compiler.proceed(this.files);
     });
   };
