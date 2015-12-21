@@ -3,11 +3,11 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=640" />
+    <meta name="viewport" content="width=640">
 
-    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
-    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen">
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
 
     <script type="text/javascript" src="javascripts/modernizr.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -47,14 +47,14 @@
 
       <section id="main_content">
         <h1>
-<a name="grunt-coffee-chain" class="anchor" href="#grunt-coffee-chain"><span class="octicon octicon-link"></span></a>grunt-coffee-chain</h1>
+<a id="grunt-coffee-chain" class="anchor" href="#grunt-coffee-chain" aria-hidden="true"><span class="octicon octicon-link"></span></a>grunt-coffee-chain</h1>
 
 <blockquote>
 <p>grunt plugin inspired by Sprockets to compile CoffeeScripts that has sprockets-style comments to indicate dependencies.</p>
 </blockquote>
 
 <h2>
-<a name="usage-script-side" class="anchor" href="#usage-script-side"><span class="octicon octicon-link"></span></a>Usage (script-side)</h2>
+<a id="usage-script-side" class="anchor" href="#usage-script-side" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage (script-side)</h2>
 
 <p>In your CoffeeScript files, write Sprockets-style comments to indicate dependencies, e.g.</p>
 
@@ -67,42 +67,39 @@
 </code></pre>
 
 <h2>
-<a name="usage-grunt-side" class="anchor" href="#usage-grunt-side"><span class="octicon octicon-link"></span></a>Usage (grunt-side)</h2>
+<a id="usage-grunt-side" class="anchor" href="#usage-grunt-side" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage (grunt-side)</h2>
 
 <p>This plugin requires Grunt <code>~0.4.1</code></p>
 
 <p>If you haven't used <a href="http://gruntjs.com/">Grunt</a> before, be sure to check out the <a href="http://gruntjs.com/getting-started">Getting Started</a> guide, as it explains how to create a <a href="http://gruntjs.com/sample-gruntfile">Gruntfile</a> as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:</p>
 
-<pre lang="shell"><code>npm install grunt-coffee-chain --save-dev
-</code></pre>
+<div class="highlight highlight-source-shell"><pre>npm install grunt-coffee-chain --save-dev</pre></div>
 
 <p>Once the plugin has been installed, it may be enabled inside your Gruntfile with this line of JavaScript:</p>
 
-<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">loadNpmTasks</span><span class="p">(</span><span class="s1">'grunt-coffee-chain'</span><span class="p">);</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">grunt</span>.<span class="pl-en">loadNpmTasks</span>(<span class="pl-s"><span class="pl-pds">'</span>grunt-coffee-chain<span class="pl-pds">'</span></span>);</pre></div>
 
 <h2>
-<a name="the-coffeechain-task" class="anchor" href="#the-coffeechain-task"><span class="octicon octicon-link"></span></a>The "coffeeChain" task</h2>
+<a id="the-coffeechain-task" class="anchor" href="#the-coffeechain-task" aria-hidden="true"><span class="octicon octicon-link"></span></a>The "coffeeChain" task</h2>
 
 <h3>
-<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h3>
+<a id="overview" class="anchor" href="#overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>Overview</h3>
 
 <p>In your project's Gruntfile, add a section named <code>coffeeChain</code> to the data object passed into <code>grunt.initConfig()</code>.</p>
 
-<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
-  <span class="nx">coffeeChain</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">your_target</span><span class="o">:</span> <span class="p">{</span>
-      <span class="c1">// Target-specific file lists and/or options go here.</span>
-    <span class="p">},</span>
-  <span class="p">},</span>
-<span class="p">})</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">grunt</span>.<span class="pl-en">initConfig</span>({
+  coffeeChain<span class="pl-k">:</span> {
+    your_target<span class="pl-k">:</span> {
+      <span class="pl-c">// Target-specific file lists and/or options go here.</span>
+    },
+  },
+})</pre></div>
 
 <h3>
-<a name="options" class="anchor" href="#options"><span class="octicon octicon-link"></span></a>Options</h3>
+<a id="options" class="anchor" href="#options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Options</h3>
 
 <h4>
-<a name="optionsclean" class="anchor" href="#optionsclean"><span class="octicon octicon-link"></span></a>options.clean</h4>
+<a id="optionsclean" class="anchor" href="#optionsclean" aria-hidden="true"><span class="octicon octicon-link"></span></a>options.clean</h4>
 
 <p><em>(Not yet implemented)</em>
 Type: <code>Booleann</code>
@@ -111,94 +108,87 @@ Default value: <code>false</code></p>
 <p>A boolean value that is used to clean resulting CoffeeScript from useless code that coffee compiler adds.</p>
 
 <h3>
-<a name="usage-examples" class="anchor" href="#usage-examples"><span class="octicon octicon-link"></span></a>Usage Examples</h3>
+<a id="usage-examples" class="anchor" href="#usage-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage Examples</h3>
 
 <h4>
-<a name="default-options" class="anchor" href="#default-options"><span class="octicon octicon-link"></span></a>Default Options</h4>
+<a id="default-options" class="anchor" href="#default-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Default Options</h4>
 
 <p>In these examples, the default options are used to compile coffee scripts to js without cleaning them`</p>
 
-<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
-  <span class="nx">coffeeChain</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">options</span><span class="o">:</span> <span class="p">{},</span>
-    <span class="nx">your_target</span><span class="o">:</span> <span class="p">{</span>
-      <span class="nx">src</span><span class="o">:</span>  <span class="s1">'app/assets/javascripts/main.coffee'</span><span class="p">,</span>
-      <span class="nx">dest</span><span class="o">:</span> <span class="s1">'public/assets/app.js'</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-<span class="p">})</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">grunt</span>.<span class="pl-en">initConfig</span>({
+  coffeeChain<span class="pl-k">:</span> {
+    options<span class="pl-k">:</span> {},
+    your_target<span class="pl-k">:</span> {
+      src<span class="pl-k">:</span>  <span class="pl-s"><span class="pl-pds">'</span>app/assets/javascripts/main.coffee<span class="pl-pds">'</span></span>,
+      dest<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>public/assets/app.js<span class="pl-pds">'</span></span>
+    }
+  },
+})</pre></div>
 
-<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
-  <span class="nx">coffeeChain</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">your_target</span><span class="o">:</span> <span class="p">{</span>
-      <span class="nx">src</span><span class="o">:</span>  <span class="s1">'app/assets/javascripts/main.coffee'</span><span class="p">,</span>
-      <span class="nx">dest</span><span class="o">:</span> <span class="s1">'public/assets/app.js'</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-<span class="p">})</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">grunt</span>.<span class="pl-en">initConfig</span>({
+  coffeeChain<span class="pl-k">:</span> {
+    your_target<span class="pl-k">:</span> {
+      src<span class="pl-k">:</span>  <span class="pl-s"><span class="pl-pds">'</span>app/assets/javascripts/main.coffee<span class="pl-pds">'</span></span>,
+      dest<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>public/assets/app.js<span class="pl-pds">'</span></span>
+    }
+  },
+})</pre></div>
 
 <h4>
-<a name="custom-options" class="anchor" href="#custom-options"><span class="octicon octicon-link"></span></a>Custom Options</h4>
+<a id="custom-options" class="anchor" href="#custom-options" aria-hidden="true"><span class="octicon octicon-link"></span></a>Custom Options</h4>
 
 <p>In this example, the custom options are used to compile coffee scripts to js cleaning them`</p>
 
-<div class="highlight highlight-js"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
-  <span class="nx">coffeeChain</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">your_target</span><span class="o">:</span> <span class="p">{</span>
-      <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">clean</span><span class="o">:</span> <span class="kc">true</span>
-      <span class="p">},</span>
-      <span class="nx">src</span><span class="o">:</span>  <span class="s1">'app/assets/javascripts/main.coffee'</span><span class="p">,</span>
-      <span class="nx">dest</span><span class="o">:</span> <span class="s1">'public/assets/app.js'</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-<span class="p">})</span>
-</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">grunt</span>.<span class="pl-en">initConfig</span>({
+  coffeeChain<span class="pl-k">:</span> {
+    your_target<span class="pl-k">:</span> {
+      options<span class="pl-k">:</span> {
+        clean<span class="pl-k">:</span> <span class="pl-c1">true</span>
+      },
+      src<span class="pl-k">:</span>  <span class="pl-s"><span class="pl-pds">'</span>app/assets/javascripts/main.coffee<span class="pl-pds">'</span></span>,
+      dest<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>public/assets/app.js<span class="pl-pds">'</span></span>
+    }
+  },
+})</pre></div>
 
 <h4>
-<a name="coffeescript-examples" class="anchor" href="#coffeescript-examples"><span class="octicon octicon-link"></span></a>CoffeeScript Examples</h4>
+<a id="coffeescript-examples" class="anchor" href="#coffeescript-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>CoffeeScript Examples</h4>
 
 <p>In this example, the custom options are used to compile coffee scripts to js minifying and cleaning them`</p>
 
-<div class="highlight highlight-coffee"><pre><span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span>
-  <span class="nv">coffeeChain:</span>
-    <span class="nv">dist:</span>
-      <span class="nv">options:</span>
-        <span class="nv">clean: </span><span class="kc">true</span>
-      <span class="nv">src: </span><span class="s">"app/main.coffee"</span>
-      <span class="nv">dest: </span><span class="s">"dist/index.js"</span>
-</pre></div>
+<div class="highlight highlight-source-coffee"><pre>grunt.initConfig
+  <span class="pl-v"><span class="pl-v">coffeeChain:</span></span>
+    <span class="pl-v"><span class="pl-v">dist:</span></span>
+      <span class="pl-v"><span class="pl-v">options:</span></span>
+        <span class="pl-v"><span class="pl-v">clean:</span></span> <span class="pl-c1">true</span>
+      <span class="pl-v"><span class="pl-v">src:</span></span> <span class="pl-s"><span class="pl-pds">"</span>app/main.coffee<span class="pl-pds">"</span></span>
+      <span class="pl-v"><span class="pl-v">dest:</span></span> <span class="pl-s"><span class="pl-pds">"</span>dist/index.js<span class="pl-pds">"</span></span></pre></div>
 
 <h2>
-<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
 <p>This application is written in CoffeeScript with sprockets-style comments to indicate dependencies and so</p>
 
 <h3>
-<a name="it-compiles-itself-to-javascript-using-previous-version-of-itself" class="anchor" href="#it-compiles-itself-to-javascript-using-previous-version-of-itself"><span class="octicon octicon-link"></span></a>it compiles itself to javascript using previous version of itself.</h3>
+<a id="it-compiles-itself-to-javascript-using-previous-version-of-itself" class="anchor" href="#it-compiles-itself-to-javascript-using-previous-version-of-itself" aria-hidden="true"><span class="octicon octicon-link"></span></a>it compiles itself to javascript using previous version of itself.</h3>
 
-<p>Due to above, please chnage coffeescripts instead of js files in order to send a pull request.</p>
+<p>When you change something in this app it is better to compile tests using previous version of this app as we use coffee_chain to compile coffee_chain to itself and need to protect us from testing application using incorrectly compiled tests. So to run tests I have added a simple script that should be used instead of 'npm test' command:</p>
+
+<pre><code>  ./compile
+</code></pre>
 
 <h2>
-<a name="release-history" class="anchor" href="#release-history"><span class="octicon octicon-link"></span></a>Release History</h2>
+<a id="release-history" class="anchor" href="#release-history" aria-hidden="true"><span class="octicon octicon-link"></span></a>Release History</h2>
 
-<p>version 0.0.1 - first release published to npm.</p>
+<blockquote>
+<p>version 1.2.5 - Current. Updated coffeeChain to save all data to a temp file and only when everything is complete overwrite the destination file</p>
+</blockquote>
 
-<p>version 0.1.0 - added custom minify option</p>
+<p>version 1.2.2 - the same as previous version but rewritten to coffeescript and compiled back to js using the same coffeeChain but using previous version 1.2.1</p>
 
-<p>version 0.1.1 - refactored version that compiles itself to itself</p>
+<p>version 1.2.1 - refactored from scratch. It was compilled in common node.js way</p>
 
-<p>version 0.1.2 - 1.2.0 - some of them are incorrect and may broke the functionality. Use any higher version</p>
-
-<p>version 1.2.0 - removed custom minify option. Use apropriate node modules instead</p>
-
-<p>version 1.2.1 - was compilled by plugin that were compiled in common node.js way</p>
-
-<p>version 1.2.2 - correctly compiled version of grunt-coffee-chain that compiles itself to itself</p>
-
-<p><a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/rrott/grunt_coffee_chain/trend.png" alt="Bitdeli Badge"></a></p>
+<p>Note: some of packages versions prior 1.2.1 may be incorrect or broken. 1.2.3 and 1.2.4 are incorrect as well. Use any higher version or the latest one.</p>
       </section>
 
       <footer>
@@ -209,7 +199,7 @@ Default value: <code>false</code></p>
           <span class="left-tail"></span>
           <span class="right-tail"></span>
         </span>
-        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <p>Generated with <a href="https://pages.github.com">GitHub Pages</a> using Merlot</p>
         <span class="octocat"></span>
       </footer>
 
