@@ -1,13 +1,12 @@
 {
   "name": "grunt-coffee-chain",
   "description": "grunt's task for concatenating CoffeeScript files that have 'require' directive  using Snockets",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "homepage": "https://github.com/rrott/grunt_coffee_chain",
-  "license": "MIT",
   "author": {
     "name": "Roman Rott (rrott)",
     "email": "roman.rott@gmail.com",
-    "url": "http://rott.org.ua"
+    "url": "https://rrott.com"
   },
   "repository": {
     "type": "git",
@@ -16,7 +15,7 @@
   "bugs": {
     "url": "https://github.com/rrott/grunt_coffee_chain/issues"
   },
-  "licenses": [
+  "license": [
     {
       "type": "MIT",
       "url": "https://github.com/rrott/grunt_coffee_chain/blob/master/LICENSE-MIT"
@@ -27,10 +26,11 @@
     "node": ">= 5.7.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "./compile"
   },
   "devDependencies": {
     "grunt": ">=0.4.5",
+    "grunt-cli": "~0.1.13",
     "grunt-coffee-chain": "1.2.5",
     "grunt-contrib-clean": "~1.0.0",
     "grunt-contrib-nodeunit": "~0.4.1"

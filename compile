@@ -14,3 +14,4 @@ echo -e "\n>>> Compiling coffee-chain\n"
 #compile test cases using new version of coffee-chain
 grunt --gruntfile Gruntfile.js --force
 rm test/expected/*.js
+grunt test

@@ -63,13 +63,13 @@
     }
 
     Compiler.prototype.proceed = function(options) {
-      var files, _i, _len, _ref, _results;
+      var files, i, len, ref, results;
       this.options = options;
-      _ref = this.options;
-      _results = [];
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        files = _ref[_i];
-        _results.push(this.temp.open("coffee-chain-", (function(_this) {
+      ref = this.options;
+      results = [];
+      for (i = 0, len = ref.length; i < len; i++) {
+        files = ref[i];
+        results.push(this.temp.open("coffee-chain-", (function(_this) {
           return function(err, tmp) {
             _this.helper.checkFiles(files);
             return _this._compileAll(files, tmp.path, function() {
@@ -79,14 +79,14 @@
           };
         })(this)));
       }
-      return _results;
+      return results;
     };
 
     Compiler.prototype._compileAll = function(files, tmp, callback) {
-      var file, _i, _len, _ref;
-      _ref = files.src;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        file = _ref[_i];
+      var file, i, len, ref;
+      ref = files.src;
+      for (i = 0, len = ref.length; i < len; i++) {
+        file = ref[i];
         this._compile(file, tmp);
       }
       if (callback) {
