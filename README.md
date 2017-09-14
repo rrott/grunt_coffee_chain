@@ -1,3 +1,6 @@
+> NOTE: This project is abandoned in favor of tons modern tools available nowadays =)
+
+
 # grunt-coffee-chain
 
 > grunt plugin inspired by Sprockets to compile CoffeeScripts that has sprockets-style comments to indicate dependencies.
